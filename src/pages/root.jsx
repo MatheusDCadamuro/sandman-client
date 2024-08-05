@@ -1,48 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
+//import styles from './root.module.css';
+
 export default function Root() {
   return (
     <>
-      <div id="sidebar">
+      <div>
         <h1>Sandman Client</h1>
-        <div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div
-              id="search-spinner"
-              aria-hidden
-              hidden={true}
-            />
-            <div
-              className="sr-only"
-              aria-live="polite"
-            ></div>
-          </form>
-          <form method="post">
-            <button type="submit">New</button>
-          </form>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link to={`analista`}>Analista</Link>
-            </li>
-            <li>
-              <Link to={`paciente`}>Paciente</Link>
-            </li>
-            <li>
-              <Link to={`exame`}>Exame</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div id="detail">
-        <Outlet />
+        <div>Esse projeto visa: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ipsa, totam facere nobis debitis vitae fuga maiores quae? Eum sit, inventore saepe animi eius culpa voluptate deserunt incidunt aliquid doloribus quisquam a facilis obcaecati fugit. Voluptatem, omnis repudiandae vero ex quaerat, eveniet ratione at maiores sit iure, enim suscipit nisi blanditiis error facilis. Accusamus eligendi voluptate, architecto provident consequatur repudiandae neque necessitatibus deserunt culpa dignissimos quo accusantium fugiat voluptas perspiciatis sequi at quam libero magni omnis itaque doloribus maxime voluptates praesentium totam. Fuga quasi dicta quia aliquid eveniet ad esse neque asperiores labore, delectus facilis unde ipsam minima. Ipsum, obcaecati?</div>
       </div>
     </>
   );

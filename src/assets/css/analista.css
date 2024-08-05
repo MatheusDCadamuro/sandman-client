@@ -1,0 +1,16 @@
+  .base {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+  }
+  .list {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    list-style: none;
+    margin-top: 2em;
+  }

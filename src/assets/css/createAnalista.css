@@ -1,0 +1,63 @@
+/* CreateAnalista.css */
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  #footer .inner {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  textarea.input-field {
+    height: auto;
+  }
+  
+  .primary.button {
+    background: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .primary.button:hover {
+    background: #0056b3;
+  }
+  
+  .actions {
+    text-align: center;
+  }
+  
+  .actions li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  label {
+    margin-left: 5px;
+    font-size: 14px;
+  }
+  

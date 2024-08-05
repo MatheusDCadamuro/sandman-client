@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Toaster, toast } from "sonner";
+import '../../assets/css/createAnalista.css';
 
 export default function CreateAnalista() {
   const [formData, setFormData] = useState({
@@ -52,18 +53,41 @@ export default function CreateAnalista() {
         <div className="inner">
           <section>
             <h2>Dados Analista</h2>
-            <Toaster richColors/>
+            <Toaster richColors />
             <form method="post" onSubmit={handleSubmit}>
               <div className="row gtr-uniform">
                 <div className="col-12">
-                  <textarea
+                  <input
                     name="nome"
                     id="demo-Nome"
                     placeholder="Nome"
                     rows="6"
                     value={formData.nome}
                     onChange={handleChange}
-                  ></textarea>
+                    className="input-field"
+                  ></input>
+                </div>
+                <div className="col-6 col-12-xsmall">
+                  <input
+                    type="text"
+                    name="cdenf"
+                    id="demo-CDEnf"
+                    placeholder="CDEnf"
+                    value={formData.cdenf}
+                    onChange={handleChange}
+                    className="input-field"
+                  />
+                </div>
+                <div className="col-6 col-12-xsmall">
+                  <input
+                    type="phone"
+                    name="telefone"
+                    id="demo-telefone"
+                    placeholder="Telefone"
+                    value={formData.telefone}
+                    onChange={handleChange}
+                    className="input-field"
+                  />
                 </div>
                 <div className="col-6 col-12-xsmall">
                   <input
@@ -73,6 +97,7 @@ export default function CreateAnalista() {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleChange}
+                    className="input-field"
                   />
                 </div>
                 <div className="col-6 col-12-xsmall">
@@ -83,26 +108,7 @@ export default function CreateAnalista() {
                     placeholder="Senha"
                     value={formData.senha}
                     onChange={handleChange}
-                  />
-                </div>
-                <div className="col-6 col-12-xsmall">
-                  <input
-                    type="text"
-                    name="cdenf"
-                    id="demo-CDEnf"
-                    placeholder="CDEnf"
-                    value={formData.cdenf}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="col-6 col-12-xsmall">
-                  <input
-                    type="number"
-                    name="telefone"
-                    id="demo-telefone"
-                    placeholder="telefone"
-                    value={formData.telefone}
-                    onChange={handleChange}
+                    className="input-field"
                   />
                 </div>
                 <div className="col-6 col-12-small">
@@ -121,7 +127,7 @@ export default function CreateAnalista() {
                       <input
                         type="submit"
                         value="Cadastrar"
-                        className="primary"
+                        className="primary button"
                         onClick={handleSubmit}
                       />
                     </li>
