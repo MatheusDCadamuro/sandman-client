@@ -9,10 +9,10 @@ export default function Analista() {
         <Link to="cadastrar">
           <button>Cadastrar Analista</button>
         </Link>
-        <Link to="/atualizar">
+        <Link to="atualizar">
           <button>Atualizar Analista</button>
         </Link>
-        <Link to="/excluir">
+        <Link to="deletar">
           <button>Excluir Analista</button>
         </Link>
       </div>

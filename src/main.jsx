@@ -7,9 +7,11 @@ import {
 import "./index.css";
 import Root from "./pages/root";
 import ErrorPage from "./pages/errorPage";
-import CreateAnalista from "./pages/createAnalista";
-import Analista from "./pages/analista";
-
+import Analista from "./pages/Analista/analista";
+import CreateAnalista from "./pages/Analista/createAnalista";
+import AtualizarAnalista from "./pages/Analista/updateAnalista";
+import ExcluirAnalista from "./pages/Analista/deleteAnalista";
+import ModificarAnalista from "./pages/Analista/teste";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +25,18 @@ const router = createBrowserRouter([
   {
     path: "analista/cadastrar",
     element: <CreateAnalista />,
+  },
+  {
+    path: "analista/atualizar",
+    element: <AtualizarAnalista />,
+  },
+  {
+    path: "analista/deletar",
+    element: <ExcluirAnalista />,
+  },
+  {
+    path: "analista/teste",
+    element: <ModificarAnalista />,
   },
 ]);
 
