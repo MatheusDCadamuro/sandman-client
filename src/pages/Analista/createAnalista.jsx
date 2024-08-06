@@ -4,11 +4,11 @@ import '../../assets/css/createAnalista.css';
 
 export default function CreateAnalista() {
   const [formData, setFormData] = useState({
+    cdenf: '',
     nome: '',
+    telefone: '',
     email: '',
     senha: '',
-    cdenf: '',
-    telefone: '',
     administrador: false,
   });
 
@@ -56,17 +56,6 @@ export default function CreateAnalista() {
             <Toaster richColors />
             <form method="post" onSubmit={handleSubmit}>
               <div className="row gtr-uniform">
-                <div className="col-12">
-                  <input
-                    name="nome"
-                    id="demo-Nome"
-                    placeholder="Nome"
-                    rows="6"
-                    value={formData.nome}
-                    onChange={handleChange}
-                    className="input-field"
-                  ></input>
-                </div>
                 <div className="col-6 col-12-xsmall">
                   <input
                     type="text"
@@ -77,6 +66,17 @@ export default function CreateAnalista() {
                     onChange={handleChange}
                     className="input-field"
                   />
+                </div>
+                <div className="col-12">
+                  <input
+                    name="nome"
+                    id="demo-Nome"
+                    placeholder="Nome"
+                    rows="6"
+                    value={formData.nome}
+                    onChange={handleChange}
+                    className="input-field"
+                  ></input>
                 </div>
                 <div className="col-6 col-12-xsmall">
                   <input

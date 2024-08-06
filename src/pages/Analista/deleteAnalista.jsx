@@ -30,7 +30,7 @@ export default function ExcluirAnalista() {
         <div>
           <input
             type="text"
-            placeholder="ID do Analista"
+            placeholder="CDEnf do Analista"
             value={id}
             onChange={(e) => setId(e.target.value)}
           />
