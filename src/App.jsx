@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Root from "./pages/root";
-import ErrorPage from "./pages/errorPage";
-import Login from './pages/login';
+import Root from "./pages/root/root";
+import ErrorPage from "./pages/root/errorPage";
+import Login from './pages/root/login';
 
 import Analista from "./pages/Analista/analista";
 import CreateAnalista from "./pages/Analista/createAnalista";
