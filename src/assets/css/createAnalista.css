@@ -59,4 +59,7 @@
     margin-left: 5px;
     font-size: 14px;
   }
-  
+  .error {
+    color: red;
+    font-size: 10px;
+  }	

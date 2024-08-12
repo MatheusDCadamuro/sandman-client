@@ -1,28 +1,53 @@
 import React, { useState } from 'react';
 import styles from '../../assets/css/Login.module.css';
+import { Toaster, toast } from "sonner";
+import { Link } from 'react-router-dom';
 
 function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [cdenf, setCdenf] = useState('');
+    const [senha, setSenha] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Lógica de autenticação aqui
-        console.log('Cdenf:', username);
-        console.log('Senha:', password);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const buttonClicked = e.nativeEvent.submitter.value;
+        if (buttonClicked === "Entrar") {
+            try {
+                const response = await fetch('http://localhost:3000/agente/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ cdenf, senha }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Login bem-sucedido:', result);
+                    toast.success("Login bem-sucedido!");
+                } else {
+                    console.error('Erro ao fazer login');
+                    toast.error("Erro ao fazer login");
+                }
+                <Link to="/analista" />;
+            } catch (error) {
+                toast.error("Erro ao enviar dados");
+                console.error('Erro ao enviar dados:', error);
+            }
+        }
     };
 
     return (
         <div className={styles.loginContainer}>
+            <Toaster richColors />
             <form onSubmit={handleSubmit} className={styles.loginForm}>
                 <h2>Login</h2>
                 <div className={styles.formGroup}>
-                    <label htmlFor="Cdenf">Cdenf:</label>
+                    <label htmlFor="cdenf">Cdenf:</label>
                     <input
                         type="text"
-                        id="Cdenf"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        id="cdenf"
+                        value={cdenf}
+                        onChange={(e) => setCdenf(e.target.value)}
                         required
                     />
                 </div>
@@ -31,15 +56,19 @@ function Login() {
                     <input
                         type="password"
                         id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
                         required
                     />
                 </div>
-                <button type="submit" className={styles.loginButton}>Entrar</button>
-                <div className={styles.secondaryButton }>
-                <button>Esqueci minha senha</button>
-                <button>Ajuda</button>
+
+                <input
+                    type="submit"
+                    value="Entrar"
+                    className={styles.primaryButton}
+                />
+                <div className={styles.marginTop}>
+                    <button type="button" className={styles.secondaryButton}>Esqueci minha senha</button>
                 </div>
             </form>
         </div>
