@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import '../../assets/css/createAnalista.css';
 
+
+//Biblioteca de validação de formulários
 const schema = yup.object().shape({
   cdenf: yup.string().required('Campo obrigatório'),
   nome: yup.string().required('Campo obrigatório'),
