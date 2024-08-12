@@ -67,9 +67,6 @@ function Login() {
                     value="Entrar"
                     className={styles.primaryButton}
                 />
-                <div className={styles.marginTop}>
-                    <button type="button" className={styles.secondaryButton}>Esqueci minha senha</button>
-                </div>
             </form>
         </div>
     );
