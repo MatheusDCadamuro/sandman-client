@@ -3,9 +3,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 15.5px;
+    height: 500px;
+    background-color: #87a09d;
   }
   .list {
     display: flex;
@@ -14,3 +14,12 @@
     list-style: none;
     margin-top: 2em;
   }
+  .list button { 
+    background-color: #1b3e4d;
+    color: white; 
+}
+  .list button:hover { 
+    background-color: #356274; 
+    color: white;
+    border-color: #356274; 
+}

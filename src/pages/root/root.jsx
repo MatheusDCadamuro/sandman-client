@@ -1,11 +1,23 @@
-//import styles from './root.module.css';
-
+import '../../assets/css/deleteAnalista.css';
 export default function Root() {
   return (
     <>
-      <div>
+      <div className="excluir-analista-container">
         <h1>Sandman Client</h1>
-        <div>Esse projeto visa: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ipsa, totam facere nobis debitis vitae fuga maiores quae? Eum sit, inventore saepe animi eius culpa voluptate deserunt incidunt aliquid doloribus quisquam a facilis obcaecati fugit. Voluptatem, omnis repudiandae vero ex quaerat, eveniet ratione at maiores sit iure, enim suscipit nisi blanditiis error facilis. Accusamus eligendi voluptate, architecto provident consequatur repudiandae neque necessitatibus deserunt culpa dignissimos quo accusantium fugiat voluptas perspiciatis sequi at quam libero magni omnis itaque doloribus maxime voluptates praesentium totam. Fuga quasi dicta quia aliquid eveniet ad esse neque asperiores labore, delectus facilis unde ipsam minima. Ipsum, obcaecati?</div>
+        <div>
+  <p >
+    Este projeto, denominado "Sandman", foi concebido e está sendo desenvolvido por alunos da Universidade Tecnológica Federal do Paraná, Campus Pato Branco (UTFPR-PB), especificamente na disciplina de Engenharia de Software. Sob a orientação criteriosa da professora Viviane Dal Molin, o projeto tem como objetivo primordial a classificação dos estágios do sono através da análise de dados obtidos por meio de eletroencefalogramas.
+  </p>
+  
+  <p>
+    A análise detalhada permite avaliar a qualidade do sono de uma pessoa, identificando padrões e irregularidades que possam afetar significativamente o bem-estar e a saúde do indivíduo. Com base nos dados coletados, o projeto propõe a criação de laudos médicos apurados, que podem servir como ferramentas valiosas para profissionais da saúde no diagnóstico e na sugestão de tratamentos mais adequados para distúrbios do sono.
+  </p>
+  
+  <p>
+    O projeto Sandman representa uma ponte entre a tecnologia e o cuidado com a saúde, destacando-se como uma iniciativa acadêmica que busca aliar conhecimento técnico a aplicações práticas no campo da saúde. A participação dos alunos neste projeto não apenas contribui para a sua formação acadêmica, mas também proporciona um impacto significativo na maneira como distúrbios do sono são compreendidos e tratados na medicina contemporânea.
+  </p>
+</div>
+
       </div>
     </>
   );

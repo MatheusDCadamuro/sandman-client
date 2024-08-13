@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../../assets/css/deleteAnalista.css';
 
 export default function ExcluirAnalista() {
   const [id, setId] = useState('');
@@ -24,18 +25,20 @@ export default function ExcluirAnalista() {
   };
 
   return (
-    <div>
+    <div className="excluir-analista-container">
       <h2>Excluir Analista</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="excluir-analista-form">
+        <div style={{ marginBottom: '10px', fontSize: '0.9rem', textAlign: 'center' }}>
+          <h3>O CDEnf digitado será excluído, o login será apagado e a pessoa não terá mais acesso.</h3>
+        </div>
         <div>
           <input
             type="text"
             placeholder="CDEnf do Analista"
             value={id}
             onChange={(e) => setId(e.target.value)}
+            maxLength={10}
           />
-        </div>
-        <div>
           <button type="submit">Excluir</button>
         </div>
       </form>
