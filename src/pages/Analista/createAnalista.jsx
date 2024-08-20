@@ -3,7 +3,7 @@ import { Toaster, toast } from "sonner";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import '../../assets/css/createAnalista.css';
+import '../../assets/css/DadosListAnalista.css';
 
 
 //Biblioteca de validação de formulários
@@ -118,12 +118,14 @@ export default function CreateAnalista() {
                   <span className='error'>{errors?.confSenha?.message}</span>
                 </div>
                 <div className="col-6 col-12-small">
-                  <input
-                    type="checkbox"
-                    id="demo-copy"
-                    {...register('administrador')}
-                  />
-                  <label htmlFor="demo-copy">Administrador</label>
+                  <h5>
+                    <input
+                      type="checkbox"
+                      id="demo-copy"
+                      {...register('administrador')}
+                    />
+                    Administrador
+                  </h5>
                 </div>
                 <div className="col-12">
                   <ul className="actions">
@@ -132,7 +134,6 @@ export default function CreateAnalista() {
                         type="submit"
                         value="Cadastrar"
                         className="primary button"
-
                       />
                     </li>
                   </ul>

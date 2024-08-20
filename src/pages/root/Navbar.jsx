@@ -15,9 +15,8 @@ function Navbar() {
             </div>
 
             <div className={style.list}>
-                <Link className={style.item} to="/analista">Analistas</Link>
-                <Link className={style.item} to="/paciente">Pacientes</Link>
-                <Link className={style.item} to="/exame">Exames</Link>
+                <Link className={style.item} to="analista">Analistas</Link>
+                <Link className={style.item} to="exame">Exames</Link>
             </div>
         </div>
     );
