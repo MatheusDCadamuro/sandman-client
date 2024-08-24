@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../assets/css/deleteAnalista.css';
+import '../../assets/css/DadosListAnalista.css';
 
 export default function ExcluirAnalista() {
   const [id, setId] = useState('');
@@ -25,23 +25,33 @@ export default function ExcluirAnalista() {
   };
 
   return (
-    <div className="excluir-analista-container">
-      <h2>Excluir Analista</h2>
-      <form onSubmit={handleSubmit} className="excluir-analista-form">
-        <div style={{ marginBottom: '10px', fontSize: '0.9rem', textAlign: 'center' }}>
-          <h3>O CDEnf digitado será excluído, o login será apagado e a pessoa não terá mais acesso.</h3>
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="CDEnf do Analista"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            maxLength={10}
-          />
-          <button type="submit">Excluir</button>
-        </div>
-      </form>
+    <div id="wrapper" className="content-center">
+      <footer id="footer">
+        <div className="inner">
+          <h2>Excluir Analista</h2>
+          <form onSubmit={handleSubmit} className="excluir-analista-form">
+            <h4>O CDEnf digitado será excluído, o login será apagado e a pessoa não terá mais acesso.</h4>
+            
+            <input
+              type="text"
+              placeholder="CDEnf do Analista"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              maxLength={10}
+            />
+            
+            <ul className="actions">
+              <li>
+                <input
+                  type="submit"
+                  value="Excluir"
+                  className="primary button"
+                />
+              </li>
+            </ul>
+          </form>
+        </div>  
+      </footer>
     </div>
   );
 }

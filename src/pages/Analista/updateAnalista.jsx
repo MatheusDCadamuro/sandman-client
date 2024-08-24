@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Toaster, toast } from "sonner";
-import '../../assets/css/createAnalista.css';
+import '../../assets/css/DadosListAnalista.css';
 
 export default function AtualizarAnalista() {
   const [formData, setFormData] = useState({

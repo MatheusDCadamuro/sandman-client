@@ -1,40 +1,46 @@
 /* CreateAnalista.css */
 
-#wrapper {
+#wrapper2 {
     display: flex;
+    padding: 20px;
+    margin-top: 0%;
+    margin-left: 0%;
+    height: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #87a09d;
-    padding: 15.5px;
-    height: 500px;
   }
   
-  #footer .inner {
+  #footer2 {
+    height: 100%;
+    align-items: center;
+  }
+
+  #footer2 .inner2 {
     background: #356274;
+    align-items: center;
     padding: 20px;
     border-radius: 5px;
+    width: 100%;
+    height: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .input-field {
+
+  .input-field2 {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
+    align-items: center;
   }
   
-  textarea.input-field {
+  textarea.input-field2 {
     height: auto;
   }
-  
-  .primary.button {
+
+
+  .primary.button2 {
     background: #1b3e4d;
     color: #ffffff;
     padding: 10px 20px;
@@ -43,17 +49,24 @@
     cursor: pointer;
   }
   
-  .primary.button:hover {
+  .primary.button2:hover {
     background: #87a09d;
   }
   
-  .actions {
+  .actions2 {
     text-align: center;
+    margin-left: 0%;
+    margin-right: 8%;
   }
   
-  .actions li {
+  .actions2 li {
     display: inline-block;
     margin-right: 10px;
+  }
+
+  .link2 {
+    color: rgb(255, 143, 143);
+    text-decoration: underline;
   }
   
   label {
