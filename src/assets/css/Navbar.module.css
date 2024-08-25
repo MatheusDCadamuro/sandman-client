@@ -13,13 +13,16 @@
     align-items: center;
     list-style: none;
 }
+
 .item {
     margin-right: 1em;
     color: white;
 }
+
 .item:hover {
     color: #87a09d;
 }
+
 .footer {
     position: absolute;
     bottom: 0;

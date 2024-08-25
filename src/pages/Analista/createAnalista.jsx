@@ -3,19 +3,31 @@ import { Toaster, toast } from "sonner";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import '../../assets/css/createAnalista.css';
+import '../../assets/css/DadosListAnalista.css';
 
 
 //Biblioteca de validação de formulários
 const schema = yup.object().shape({
-  cdenf: yup.string().required('Campo obrigatório'),
+  cdenf: yup.string().required('Campo obrigatório')
+  .mathches(/^d{7}/),
   nome: yup.string().required('Campo obrigatório'),
-  telefone: yup.string().required('Campo obrigatório'),
+  telefone: yup.string()
+  .required('Campo obrigatório')
+  .matches(/^\d{11}$/, 'Telefone inválido'),
   email: yup.string().email('Email inválido').required('Campo obrigatório'),
-  senha: yup.string().required('Campo obrigatório').min(8, 'Mínimo de 8 caracteres'),
-  confSenha: yup.string().oneOf([yup.ref('senha'), null], 'Senhas não conferem'),
+  senha: yup.string()
+    .required('Campo obrigatório')
+    .min(8, 'A senha deve ter pelo menos 8 caracteres')
+    .matches(/[A-Z]/, 'A senha deve ter pelo menos 1 letra maiúscula.')
+    .matches(/[a-z]/, 'A senha deve ter pelo menos 1 letra minúscula.')
+    .matches(/\d/, 'A senha deve ter pelo menos 1 número.')
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, 'A senha deve ter pelo menos 1 caractere especial.'),
+  confSenha: yup.string()
+    .oneOf([yup.ref('senha'), null], 'Senhas não conferem')
+    .required('Campo obrigatório'),
   administrador: yup.boolean(),
 });
+
 
 export default function CreateAnalista() {
 
@@ -118,12 +130,14 @@ export default function CreateAnalista() {
                   <span className='error'>{errors?.confSenha?.message}</span>
                 </div>
                 <div className="col-6 col-12-small">
-                  <input
-                    type="checkbox"
-                    id="demo-copy"
-                    {...register('administrador')}
-                  />
-                  <label htmlFor="demo-copy">Administrador</label>
+                  <h5>
+                    <input
+                      type="checkbox"
+                      id="demo-copy"
+                      {...register('administrador')}
+                    />
+                    Administrador
+                  </h5>
                 </div>
                 <div className="col-12">
                   <ul className="actions">
@@ -132,7 +146,6 @@ export default function CreateAnalista() {
                         type="submit"
                         value="Cadastrar"
                         className="primary button"
-
                       />
                     </li>
                   </ul>
