@@ -7,27 +7,36 @@ import '../../assets/css/DadosListAnalista.css';
 
 
 //Biblioteca de validação de formulários
-const schema = yup.object().shape({
-  cdenf: yup.string().required('Campo obrigatório')
-  .mathches(/^d{7}/),
-  nome: yup.string().required('Campo obrigatório'),
-  telefone: yup.string()
-  .required('Campo obrigatório')
-  .matches(/^\d{11}$/, 'Telefone inválido'),
-  email: yup.string().email('Email inválido').required('Campo obrigatório'),
-  senha: yup.string()
-    .required('Campo obrigatório')
-    .min(8, 'A senha deve ter pelo menos 8 caracteres')
-    .matches(/[A-Z]/, 'A senha deve ter pelo menos 1 letra maiúscula.')
-    .matches(/[a-z]/, 'A senha deve ter pelo menos 1 letra minúscula.')
-    .matches(/\d/, 'A senha deve ter pelo menos 1 número.')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, 'A senha deve ter pelo menos 1 caractere especial.'),
-  confSenha: yup.string()
-    .oneOf([yup.ref('senha'), null], 'Senhas não conferem')
-    .required('Campo obrigatório'),
-  administrador: yup.boolean(),
-});
+//const schema = yup.object().shape({
+// cdenf: yup.string().required('Campo obrigatório')
+//  .mathches(/^d{7}/, "CDEnf inválido")
+// nome: yup.string().required('Campo obrigatório'),
+// telefone: yup.string()
+//   .required('Campo obrigatório')
+//   .matches(/^\d{11}$/, 'Telefone inválido'),
+// email: yup.string().email('Email inválido').required('Campo obrigatório'),
+// senha: yup.string()
+//   .required('Campo obrigatório')
+//   .min(8, 'A senha deve ter pelo menos 8 caracteres')
+//   .matches(/[A-Z]/, 'A senha deve ter pelo menos 1 letra maiúscula.')
+//   .matches(/[a-z]/, 'A senha deve ter pelo menos 1 letra minúscula.')
+//   .matches(/\d/, 'A senha deve ter pelo menos 1 número.')
+//   .matches(/[!@#$%^&*(),.?":{}|<>]/, 'A senha deve ter pelo menos 1 caractere especial.'),
+// confSenha: yup.string()
+//   .oneOf([yup.ref('senha'), null], 'Senhas não conferem')
+//   .required('Campo obrigatório'),
+// administrador: yup.boolean(),
+//});
 
+const schema = yup.object().shape({
+  cdenf: yup.string().required('Campo obrigatório'),
+  nome: yup.string().required('Campo obrigatório'),
+  telefone: yup.string().required('Campo obrigatório'),
+  email: yup.string().email('Email inválido').required('Campo obrigatório'),
+  senha: yup.string().required('Campo obrigatório'),
+  confSenha: yup.string().oneOf([yup.ref('senha'), null], 'Senhas não conferem').required('Campo obrigatório'),
+  administrador: yup.boolean()
+});
 
 export default function CreateAnalista() {
 
@@ -36,22 +45,19 @@ export default function CreateAnalista() {
   const handleSubmit = async (data) => {
     console.log('data:', data);
     try {
-      const response = await fetch('http://localhost:3000/agente/create', {
+      const response = await fetch('http://localhost:3000/analista/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
         },
         body: JSON.stringify(data),
-      });
+      }).then(response => response.json());
 
       if (response.ok) {
-        const result = await response.json();
-        console.log('Analista criado com sucesso:', result);
-        toast.success("Analista criado com sucesso!");
+        toast.success(response.message);
       } else {
-        console.error('Erro ao criar analista');
-        toast.error("Erro ao criar analista");
+        toast.error(response.message);
       }
     } catch (error) {
       toast.error("Erro ao enviar dados");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../assets/css/DadosListLaudo.css';
 
 export default function GerarLaudo() {
@@ -6,7 +6,7 @@ export default function GerarLaudo() {
     <div id="wrapper-4" className="content-center-4">
       <footer id="footer-4">
         <div className="inner-4">
-          <h1>llllllllllllllllllllllllllllllllllllllllllllllllll</h1>
+          
           <h2>Laudo</h2>
 
           <input
