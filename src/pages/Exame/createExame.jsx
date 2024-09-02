@@ -4,41 +4,53 @@ import { Toaster, toast } from "sonner";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useState } from 'react';
 import '../../assets/css/DadosListExame.css';
 
 const schema = yup.object().shape({
     cpf: yup.string().required('Campo obrigatório'),
     cdenf: yup.string().required('Campo obrigatório'),
     motivo: yup.string().required('Campo obrigatório'),
-    eeg: yup.mixed()
-    .required('O arquivo EEG é obrigatório')
-    .test('is-json', 'O arquivo deve ser um JSON válido', (value) => {
-        if (!value || !value.length) return false; // Verifica se algum arquivo foi selecionado
-        const file = value[0];
-
-        return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    JSON.parse(e.target.result); // Tenta fazer o parse do conteúdo do arquivo
-                    resolve(true); // JSON válido
-                } catch (error) {
-                    resolve(false); // JSON inválido
-                }
-            };
-            reader.onerror = () => resolve(false); // Retorna falso se ocorrer um erro na leitura do arquivo
-            reader.readAsText(file); // Lê o arquivo como texto
-        });
-    })
+    eeg: yup.mixed(),
 });
 
 
 export default function CreateExame() {
 
     const { register, handleSubmit: onSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+    const [fileContent, setFileContent] = useState(null);
 
     const handleSubmit = async (data) => {
-        console.log('data:', data);
+        try {
+            const jsonData = JSON.parse(fileContent);
+            data.eeg_reading = jsonData;
+
+            const classifier = await fetch('http://127.0.0.1:5000/classifier/exam', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data.eeg_reading),
+            }).then((response) => response.json());
+
+            console.log('classifier:', classifier);
+            console.log('data:', data);
+
+            if (!classifier) {
+                log.error('Exame object is empty');
+                res.status(500).send({ message: 'Exame object is empty' });
+                return;
+            }
+            data.eeg = classifier.job_id;
+            enviarBack(data);
+            
+        } catch (error) {
+            toast.error("Erro ao enviar dados para o classificador.");
+            console.error('Erro ao enviar dados para o classificador:', error);
+        }
+    };
+
+    const enviarBack = async (data) => {
         try {
             const response = await fetch('http://localhost:3000/exame/create', {
                 method: 'POST',
@@ -51,14 +63,42 @@ export default function CreateExame() {
 
             if (response.ok) {
                 toast.success(response.message);
+
             } else {
                 toast.error(response.message);
             }
+
         } catch (error) {
-            toast.error("Erro ao enviar dados");
+            toast.error("Erro ao enviar dados.");
             console.error('Erro ao enviar dados:', error);
         }
-    };
+
+    }
+
+    async function handleFileInput(event) {
+        try {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    try {
+                        const content = e.target.result;
+                        setFileContent(content);
+                    } catch (error) {
+                        toast.error("Erro ao ler o conteúdo do arquivo.");
+                        console.error("Erro ao ler o conteúdo do arquivo:", error.message);
+                    }
+                };
+
+                reader.readAsText(file); // Lê o arquivo como texto
+            }
+        } catch (error) {
+            toast.error("Erro de validação ou leitura do arquivo.");
+            console.error("Erro de validação:", error.message);
+        }
+    }
+
 
     return (
         <div id="wrapper2" className="content-center2">
@@ -98,10 +138,10 @@ export default function CreateExame() {
                                 <h5 className=''>Coloque o EEG do paciente abaixo</h5>
                                 <input
                                     type="file"
-                                    id="demo-eeg"
+                                    id="fileInput"
                                     className="input-field"
                                     accept=".json"
-                                    {...register('eeg')}
+                                    onChange={handleFileInput}
                                 />
                                 <span className='error'>{errors?.eeg?.message}</span>
                             </li>
