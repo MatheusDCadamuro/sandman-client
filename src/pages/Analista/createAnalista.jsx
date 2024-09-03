@@ -9,11 +9,11 @@ import '../../assets/css/DadosListAnalista.css';
 //Biblioteca de validação de formulários
 const schema = yup.object().shape({
   cdenf: yup.string().required('Campo obrigatório')
-  .mathches(/^d{7}/),
+    .matches(/^\d{7}$/, 'Cdenf inválido'), // Corrigido para validar 7 dígitos
   nome: yup.string().required('Campo obrigatório'),
   telefone: yup.string()
-  .required('Campo obrigatório')
-  .matches(/^\d{11}$/, 'Telefone inválido'),
+    .required('Campo obrigatório')
+    .matches(/^\d{11}$/, 'Telefone inválido'),
   email: yup.string().email('Email inválido').required('Campo obrigatório'),
   senha: yup.string()
     .required('Campo obrigatório')
