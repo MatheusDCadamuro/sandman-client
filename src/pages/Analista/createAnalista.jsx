@@ -5,33 +5,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import '../../assets/css/DadosListAnalista.css';
 
-
-//Biblioteca de validação de formulários
-//const schema = yup.object().shape({
-// cdenf: yup.string().required('Campo obrigatório')
-//  .mathches(/^d{7}/, "CDEnf inválido")
-// nome: yup.string().required('Campo obrigatório'),
-// telefone: yup.string()
-//   .required('Campo obrigatório')
-//   .matches(/^\d{11}$/, 'Telefone inválido'),
-// email: yup.string().email('Email inválido').required('Campo obrigatório'),
-// senha: yup.string()
-//   .required('Campo obrigatório')
-//   .min(8, 'A senha deve ter pelo menos 8 caracteres')
-//   .matches(/[A-Z]/, 'A senha deve ter pelo menos 1 letra maiúscula.')
-//   .matches(/[a-z]/, 'A senha deve ter pelo menos 1 letra minúscula.')
-//   .matches(/\d/, 'A senha deve ter pelo menos 1 número.')
-//   .matches(/[!@#$%^&*(),.?":{}|<>]/, 'A senha deve ter pelo menos 1 caractere especial.'),
-// confSenha: yup.string()
-//   .oneOf([yup.ref('senha'), null], 'Senhas não conferem')
-//   .required('Campo obrigatório'),
-// administrador: yup.boolean(),
-//});
-
 const schema = yup.object().shape({
-  cdenf: yup.string().required('Campo obrigatório'),
+  cdenf: yup.string().required('Campo obrigatório')
+    .matches(/^\d{7}$/, 'Cdenf inválido'), // Corrigido para validar 7 dígitos
   nome: yup.string().required('Campo obrigatório'),
-  telefone: yup.string().required('Campo obrigatório'),
+  telefone: yup.string()
+    .required('Campo obrigatório')
+    .matches(/^\d{11}$/, 'Telefone inválido'),
   email: yup.string().email('Email inválido').required('Campo obrigatório'),
   senha: yup.string().required('Campo obrigatório'),
   confSenha: yup.string().oneOf([yup.ref('senha'), null], 'Senhas não conferem').required('Campo obrigatório'),
