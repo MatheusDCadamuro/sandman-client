@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./pages/root/Navbar";
 import App from './App';
-import Footer from "./pages/root/Footer";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -11,7 +10,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router >
       <Navbar />
       <App />
-   
     </Router>
   </React.StrictMode>
 );

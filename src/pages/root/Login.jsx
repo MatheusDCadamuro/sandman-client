@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
 import styles from '../../assets/css/Login.module.css';
 import { Toaster, toast } from "sonner";
-import { Link } from 'react-router-dom';
+import authService from '../../services/auth.service';
 
 function Login() {
     const [cdenf, setCdenf] = useState('');
     const [senha, setSenha] = useState('');
+    const [redirectTo, setRedirectTo] = useState(null);
+
+    let data = {
+        cdenf: cdenf,
+        senha: senha,
+        redirectTo: redirectTo
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const buttonClicked = e.nativeEvent.submitter.value;
         if (buttonClicked === "Entrar") {
             try {
-                const response = await fetch('http://localhost:3000/agente/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ cdenf, senha }),
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Login bem-sucedido:', result);
-                    toast.success("Login bem-sucedido!");
-                } else {
-                    console.error('Erro ao fazer login');
-                    toast.error("Erro ao fazer login");
-                }
-                <Link to="/analista" />;
+                let res = await authService.authenticate(data);
+                console.log("Login", res.data);
+                authService.setLoggedUser(res.data);
+                setRedirectTo("/");
+                
             } catch (error) {
-                toast.error("Erro ao enviar dados");
-                console.error('Erro ao enviar dados:', error);
+                console.log("error", error);
+                toast.error("Erro ao fazer login");
             }
         }
-    };
-
+    }
+    if(redirectTo){
+       window.location.href = redirectTo;
+    }
     return (
         <div className={styles.loginContainer}>
             <Toaster richColors />

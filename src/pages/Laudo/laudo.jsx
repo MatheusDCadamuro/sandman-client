@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Toaster, toast } from "sonner";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import '../../assets/css/DadosListLaudo.css';
 
+const schema = yup.object().shape({
+  id: yup.string().required('Campo obrigatório'),
+});
+
 export default function Laudo() {
+  const { register, handleSubmit: onSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
-
-{/*
-  const [exames, setExames] = useState([]);
-
-  // Exemplo de uso de useEffect para simular a recuperação de dados do banco
-  useEffect(() => {
-    // Simulação de chamada ao banco de dados
-    const fetchExames = async () => {
-      const examesSimulados = [
-        { id: 1, nome: 'Exame 1' },
-        { id: 2, nome: 'Exame 2' },
-        { id: 3, nome: 'Exame 3' },
-      ];
-      setExames(examesSimulados);
-    };
-    fetchExames();
-  }, []);
-*/}
-
+const buscarLaudo = async () => {
+    try {
+        const response = await fetch('http://localhost:3000/exame/laudo', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
+            },
+        }).then((response) => response.json());
+        console.log('response:', response);
+    } catch (error) {
+        console.error('Erro ao buscar laudo:', error);
+    }
+}
   return (
     <div id="wrapper-4" className="content-center">
       <footer id="footer-4">
@@ -33,6 +38,7 @@ export default function Laudo() {
             type="number"
             placeholder="CPF / CDEnf"
             className="input-field-4"
+            {...register('id')}
           />
           
           <ul className="actions-4">
