@@ -1,47 +1,82 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Toaster } from 'sonner';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import '../../assets/css/DadosListLaudo.css';
 
+const schema = yup.object().shape({
+  job_id: yup.string().required('Campo obrigatório'),
+  CDEnf: yup.string().required('Campo obrigatório'),
+  name: yup.string().required('Campo obrigatório'),
+  technician: yup.string().required('Campo obrigatório'),
+  notes: yup.string().required('Campo obrigatório'),
+});
+
 export default function GerarLaudo() {
+  const location = useLocation();
+  const { data } = location.state || {};
+  const [eeg_reading_plot, seteeg_reading_plot] = useState(null);
+  const [classified_eeg_reading_plot, setclassified_eeg_reading_plot] = useState(null);
+  const [sleep_stages_distribution_plot, setsleep_stages_distribution_plot] = useState(null);
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+
+  useEffect(() => {
+    if (!data) {
+      console.error('Nenhum exame foi selecionado');
+    } else {
+      console.log('Exames selecionados:', data);
+      seteeg_reading_plot(data.laudo.eeg_reading_plot);
+      setclassified_eeg_reading_plot(data.laudo.classified_eeg_reading_plot);
+      setsleep_stages_distribution_plot(data.laudo.sleep_stages_distribution_plot);
+
+    }
+  }, [data]);
+
+  const onSubmitForm = async (data) => {
+    //Vou fazer o código para enviar o laudo por email
+  };
+
   return (
-    <div id="wrapper-4" className="content-center-4">
-      <footer id="footer-4">
-        <div className="inner-4">
-          
-          <h2>Laudo</h2>
-
-          <input
-            id="demo-cpf-CDEnd"
-            type="number"
-            placeholder="CPF / CDEnf"
-            className="input-field-4"
+    <div>
+      {eeg_reading_plot ? (
+        <div>
+          <h2>Resultado do Exame</h2>
+          <img
+            src={`data:image/png;base64,${eeg_reading_plot}`}
+            alt="Laudo"
+            style={{ maxWidth: '33%', height: 'auto' }}
           />
-          
-          <ul className="actions-4">
-            <li>
-                <input
-                    type="submit"
-                    value="Procurar"
-                    className="primary button-4"
-                />
-            </li>
-           </ul>
-          
-
-          {/* Campo para lista de exames */}
-          <select className="input-field-4">
-            <option value="">Selecione um exame</option>
-          </select>
-          <ul className="actions-4">
-            <li>
-                <input
-                    type="submit"
-                    value="Ver Laudo"
-                    className="primary button-4"
-                />
-            </li>
-           </ul>
+          <img
+            src={`data:image/png;base64,${classified_eeg_reading_plot}`}
+            alt="Laudo"
+            style={{ maxWidth: '33%', height: 'auto' }}
+          />
+          <img
+            src={`data:image/png;base64,${sleep_stages_distribution_plot}`}
+            alt="Laudo"
+            style={{ maxWidth: '33%', height: 'auto' }}
+          />
+          <Toaster richColors />
+          <form method="post" onSubmit={handleSubmit(onSubmitForm)}>
+            <div>
+              <label htmlFor="notes">notes</label>
+              <input
+                type="text"
+                id="notes"
+                {...register('notes')}
+              />
+              {errors.notes && <p>{errors.notes.message}</p>}
+            </div>
+            
+            <button type="submit">Enviar Laudo</button>
+          </form>
         </div>
-      </footer>
+      ) : (
+        <p>Nenhuma imagem encontrada</p>
+      )}
     </div>
   );
 }

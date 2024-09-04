@@ -72,7 +72,6 @@ export default function CreateExame() {
             toast.error("Erro ao enviar dados.");
             console.error('Erro ao enviar dados:', error);
         }
-
     }
 
     async function handleFileInput(event) {

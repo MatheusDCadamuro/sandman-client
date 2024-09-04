@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Definindo a base do url para os endpoints
-const apiUrl = "http://localhost:3000/agente/login";
+const apiUrl = "http://localhost:3000/analista/login";
 
 // Definindo o bjeto do serviço
 const authService = {
