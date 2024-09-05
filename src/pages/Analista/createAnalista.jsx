@@ -13,9 +13,17 @@ const schema = yup.object().shape({
     .required('Campo obrigatório')
     .matches(/^\d{11}$/, 'Telefone inválido'),
   email: yup.string().email('Email inválido').required('Campo obrigatório'),
-  senha: yup.string().required('Campo obrigatório'),
-  confSenha: yup.string().oneOf([yup.ref('senha'), null], 'Senhas não conferem').required('Campo obrigatório'),
-  administrador: yup.boolean()
+  senha: yup.string()
+    .required('Campo obrigatório')
+    .min(8, 'A senha deve ter pelo menos 8 caracteres')
+    .matches(/[A-Z]/, 'A senha deve ter pelo menos 1 letra maiúscula.')
+    .matches(/[a-z]/, 'A senha deve ter pelo menos 1 letra minúscula.')
+    .matches(/\d/, 'A senha deve ter pelo menos 1 número.')
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, 'A senha deve ter pelo menos 1 caractere especial.'),
+  confSenha: yup.string()
+    .oneOf([yup.ref('senha'), null], 'Senhas não conferem')
+    .required('Campo obrigatório'),
+  administrador: yup.boolean(),
 });
 
 export default function CreateAnalista() {
