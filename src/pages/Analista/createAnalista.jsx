@@ -29,7 +29,7 @@ export default function CreateAnalista() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
+          'x-access-token': localStorage.getItem('x-access-token'),
         },
         body: JSON.stringify(data),
       }).then(response => response.json());

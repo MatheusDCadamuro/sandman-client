@@ -8,7 +8,6 @@ function Login() {
     const [cdenf, setCdenf] = useState('');
     const [senha, setSenha] = useState('');
     const [redirectTo, setRedirectTo] = useState(null);
-    const navigate = useNavigate();
 
     let data = {
         cdenf: cdenf,

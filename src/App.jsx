@@ -15,7 +15,7 @@ import GerarLaudo from './pages/Laudo/gerarLaudo';
 
 
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem('x-access-token'); // Verifique onde você está armazenando o token (localStorage/sessionStorage)
+  const token = localStorage.getItem('x-access-token');
 
   if (!token) {
     // Se não houver token, redirecione para a página de login

@@ -43,7 +43,7 @@ export default function CreateExame() {
             }
             data.eeg = classifier.job_id;
             enviarBack(data);
-            
+
         } catch (error) {
             toast.error("Erro ao enviar dados para o classificador.");
             console.error('Erro ao enviar dados para o classificador:', error);
@@ -56,13 +56,13 @@ export default function CreateExame() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
+                    'x-access-token': localStorage.getItem('x-access-token'),
                 },
                 body: JSON.stringify(data),
             }).then(response => response.json());
 
             if (response.ok) {
-                toast.success(response.message);
+                toast.success("Dados enviados para o classificador.");
 
             } else {
                 toast.error(response.message);
