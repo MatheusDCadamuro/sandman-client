@@ -23,9 +23,7 @@ function Login() {
             try {
            
                 let res = await authService.authenticate(data);
-                console.log("Login", res.data);
                 authService.setLoggedUser(res.data);
-                //console.log("res", res.data.token);
                 localStorage.setItem('x-access-token', res.data.token);
                 setRedirectTo("/");
                 
