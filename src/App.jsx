@@ -1,9 +1,8 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Root from "./pages/root/root";
 import ErrorPage from "./pages/root/errorPage";
 import Login from './pages/root/Login';
-
 import Analista from "./pages/Analista/analista";
 import CreateAnalista from "./pages/Analista/createAnalista";
 import AtualizarAnalista from "./pages/Analista/updateAnalista";
@@ -14,21 +13,34 @@ import CreatePaciente from './pages/Paciente/createPaciente';
 import Laudo from './pages/Laudo/laudo';
 import GerarLaudo from './pages/Laudo/gerarLaudo';
 
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('authToken'); // Verifique onde você está armazenando o token (localStorage/sessionStorage)
+
+  if (!token) {
+    // Se não houver token, redirecione para a página de login
+    return <Navigate to="/login" replace />;
+  }
+  // Se o token existir, renderize a rota
+  return children;
+};
+
 function App() {
 
   return (
     <Routes>
       <Route path="/" element={<Root />} errorElement={<ErrorPage />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/analista" element={<Analista />} />
-      <Route path="/analista/cadastrar" element={<CreateAnalista />} />
-      <Route path="/analista/atualizar" element={<AtualizarAnalista />} />
-      <Route path="/analista/deletar" element={<ExcluirAnalista />} />
-      <Route path="/exame" element={<Exame />} />
-      <Route path="/exame/cadastrar" element={<CreateExame />} />
-      <Route path="/exame/cadastrar/paciente" element={<CreatePaciente />} />
-      <Route path="/exame/laudo" element={<Laudo />} />
-      <Route path="/exame/laudo/gerar" element={<GerarLaudo />} />
+
+      <Route path="/analista" element={<ProtectedRoute><Analista /></ProtectedRoute>} />
+      <Route path="/analista/cadastrar" element={<ProtectedRoute><CreateAnalista /></ProtectedRoute>} />
+      <Route path="/analista/atualizar" element={<ProtectedRoute><AtualizarAnalista /></ProtectedRoute>} />
+      <Route path="/analista/deletar" element={<ProtectedRoute><ExcluirAnalista /></ProtectedRoute>} />
+      <Route path="/exame" element={<ProtectedRoute><Exame /></ProtectedRoute>} />
+      <Route path="/exame/cadastrar" element={<ProtectedRoute><CreateExame /></ProtectedRoute>} />
+      <Route path="/exame/cadastrar/paciente" element={<ProtectedRoute><CreatePaciente /></ProtectedRoute>} />
+      <Route path="/exame/laudo" element={<ProtectedRoute><Laudo /></ProtectedRoute>} />
+      <Route path="/exame/laudo/gerar" element={<ProtectedRoute><GerarLaudo/></ProtectedRoute>} />
     </Routes>
   )
 }

@@ -33,27 +33,4 @@ const authService = {
         }
     }
 }
-// try {
-//     const response = await fetch('http://localhost:3000/agente/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ cdenf, senha }),
-//     });
-
-//     if (response.ok) {
-//         const result = await response.json();
-//         console.log('Login bem-sucedido:', result);
-//         setToken(result.token);
-//         toast.success("Login bem-sucedido!");
-//     } else {
-//         console.error('Erro ao fazer login');
-//         toast.error("Erro ao fazer login");
-//     }
-
-// } catch (error) {
-//     toast.error("Erro ao enviar dados");
-//     console.error('Erro ao enviar dados:', error);
-// }
 export default authService;
