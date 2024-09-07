@@ -28,15 +28,12 @@ export default function CreatePaciente() {
                     'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
                 },
                 body: JSON.stringify(data),
-            });
+            }).then(response => response.json());
 
             if (response.ok) {
-                const result = await response.json();
-                console.log('Paciente cadastrado com sucesso:', result);
-                toast.success("Paciente cadastrado com sucesso!");
+              toast.success(response.message);
             } else {
-                console.error('Erro ao cadastrar paciente');
-                toast.error("Erro ao cadastrar paciente");
+              toast.error(response.message);
             }
         } catch (error) {
             toast.error("Erro ao enviar dados");

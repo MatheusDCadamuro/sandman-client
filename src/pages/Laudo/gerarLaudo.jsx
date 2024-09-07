@@ -1,17 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Toaster } from 'sonner';
+import { Toaster, toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import '../../assets/css/DadosListLaudo.css';
 
 const schema = yup.object().shape({
-  job_id: yup.string().required('Campo obrigatório'),
-  CDEnf: yup.string().required('Campo obrigatório'),
-  name: yup.string().required('Campo obrigatório'),
-  technician: yup.string().required('Campo obrigatório'),
   notes: yup.string().required('Campo obrigatório'),
 });
 
@@ -21,7 +17,8 @@ export default function GerarLaudo() {
   const [eeg_reading_plot, seteeg_reading_plot] = useState(null);
   const [classified_eeg_reading_plot, setclassified_eeg_reading_plot] = useState(null);
   const [sleep_stages_distribution_plot, setsleep_stages_distribution_plot] = useState(null);
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+  const { register, handleSubmit: onSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+
 
   useEffect(() => {
     if (!data) {
@@ -35,8 +32,36 @@ export default function GerarLaudo() {
     }
   }, [data]);
 
-  const onSubmitForm = async (data) => {
-    //Vou fazer o código para enviar o laudo por email
+  const handleSubmit = async (info) => {
+    try {
+      console.log('data:', info);
+     const  enviarPdf = {
+        CDEnf: data.pdf.CDEnf,
+        name: data.pdf.name,
+        job_id: data.pdf.job_id,
+        technician: data.pdf.technician,
+        notes: info.notes,
+      }
+      console.log('enviarPdf:', enviarPdf);
+      const response = await fetch('http://localhost:3000/exame/pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
+        },
+        body: JSON.stringify(enviarPdf),
+      }).then((response) => response.json());
+
+      if (response.ok) {
+        toast.success(response.message);
+      } else {
+        toast.error(response.message);
+      }
+
+    } catch (error) {
+      toast.error("Erro ao enviar dados");
+      console.error('Erro ao enviar dados:', error);
+    }
   };
 
   return (
@@ -60,7 +85,7 @@ export default function GerarLaudo() {
             style={{ maxWidth: '33%', height: 'auto' }}
           />
           <Toaster richColors />
-          <form method="post" onSubmit={handleSubmit(onSubmitForm)}>
+          <form method="post" onSubmit={onSubmit(handleSubmit)}>
             <div>
               <label htmlFor="notes">notes</label>
               <input
@@ -70,8 +95,16 @@ export default function GerarLaudo() {
               />
               {errors.notes && <p>{errors.notes.message}</p>}
             </div>
-            
-            <button type="submit">Enviar Laudo</button>
+
+            <ul className="actions2">
+              <li>
+                <input
+                  type="submit"
+                  value="Examinar"
+                  className="primary button2"
+                />
+              </li>
+            </ul>
           </form>
         </div>
       ) : (
