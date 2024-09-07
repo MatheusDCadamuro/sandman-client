@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import styles from '../../assets/css/Login.module.css';
 import { Toaster, toast } from "sonner";
 import authService from '../../services/auth.service';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [cdenf, setCdenf] = useState('');
     const [senha, setSenha] = useState('');
     const [redirectTo, setRedirectTo] = useState(null);
+    const navigate = useNavigate();
 
     let data = {
         cdenf: cdenf,
@@ -23,6 +25,8 @@ function Login() {
                 let res = await authService.authenticate(data);
                 console.log("Login", res.data);
                 authService.setLoggedUser(res.data);
+                //console.log("res", res.data.token);
+                localStorage.setItem('x-access-token', res.data.token);
                 setRedirectTo("/");
                 
             } catch (error) {
