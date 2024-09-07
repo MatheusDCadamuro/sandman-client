@@ -13,7 +13,6 @@ import CreatePaciente from './pages/Paciente/createPaciente';
 import Laudo from './pages/Laudo/laudo';
 import GerarLaudo from './pages/Laudo/gerarLaudo';
 
-
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('x-access-token');
 
@@ -33,6 +32,7 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       <Route path="/analista" element={<ProtectedRoute><Analista /></ProtectedRoute>} />
+
       <Route path="/analista/cadastrar" element={<ProtectedRoute><CreateAnalista /></ProtectedRoute>} />
       <Route path="/analista/atualizar" element={<ProtectedRoute><AtualizarAnalista /></ProtectedRoute>} />
       <Route path="/analista/deletar" element={<ProtectedRoute><ExcluirAnalista /></ProtectedRoute>} />

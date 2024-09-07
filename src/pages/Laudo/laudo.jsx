@@ -10,10 +10,9 @@ const schema = yup.object().shape({
   cpf: yup.string().required('Campo obrigatório'),
 });
 
-//falta limitar o checkbox para apenas um exame
 const ExameTable = ({ exames = [], onCheckboxChange, selectedExames }) => {
   return (
-    <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <table className="analista-table">
       <thead>
         <tr>
           <th>Select</th>
@@ -93,7 +92,7 @@ export default function Laudo() {
       toast.error("Selecione pelo menos um exame para visualizar o laudo");
       return;
     }
-    try{
+    try {
       const response = await fetch(`http://localhost:3000/exame/read/${selectedExames[0]}`, { 
         method: 'GET',
         headers: {
@@ -106,7 +105,7 @@ export default function Laudo() {
       } else {
         toast.error(response.message);
       }
-    }catch(error){
+    } catch (error) {
       toast.error("Erro ao gerar laudo");
       console.error('Erro ao gerar laudo:', error);
     }
@@ -122,7 +121,7 @@ export default function Laudo() {
             <input
               id="demo-cpf-CDEnd"
               type="number"
-              placeholder="CPF / CDEnf"
+              placeholder="CPF"
               className="input-field-4"
               {...register('cpf')}
             />

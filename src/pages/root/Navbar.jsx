@@ -4,11 +4,18 @@ import style from '../../assets/css/Navbar.module.css';
 import logo from '../../assets/images/Logo.png';
 import styleButton from '../../assets/css/NavbarButton.module.css';
 
-
 function Navbar() {
     const navigate = useNavigate();
+
+    // Função para verificar se o usuário tem o novo token admin
+    const hasAdminToken = () => {
+        const adminToken = localStorage.getItem('admin-token');
+        return adminToken === '"admin"'; // Substitua pelo valor real do token admin
+    };
+
     const handleLogout = () => {
         localStorage.removeItem('x-access-token'); // Remove o token de autenticação
+        localStorage.removeItem('admin-token'); // Remove o novo token admin
         navigate('/login'); // Redireciona para a página de login
     };
 
@@ -22,15 +29,15 @@ function Navbar() {
             </div>
 
             <div className={style.list}>
-                <Link className={style.item} to="analista">Analistas</Link>
-                <Link className={style.item} to="exame">Exames</Link>
-            <div className={styleButton.profileMenu}>
-            <button onClick={handleLogout} className={styleButton.profileButton}>Off</button>
+                {hasAdminToken() && (
+                    <>
+                        <Link className={style.item} to="analista">Analistas</Link>
+                    </>
+                )}
+                <div className={styleButton.profileMenu}>
+                    <button onClick={handleLogout} className={styleButton.profileButton}>Off</button>
+                </div>
             </div>
-
-            </div>
-
-            
         </div>
     );
 }

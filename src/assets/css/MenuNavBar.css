@@ -3,29 +3,73 @@
   flex-direction: column;
   padding: 15.5px;
   height: 100%;
-  background-color:   #87a09d;
+  background-color: #87a09d;
 }
 
-.text{
+.text {
   width: 60%;
+  margin: 0 auto;
+  text-align: left;
 }
+
+.table-container {
+  margin: 2em auto; 
+  width: 80%; 
+  position: relative;
+}
+
+.analista-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.analista-table th, .analista-table td {
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+.analista-table th {
+  background-color: #1b3e4d;
+  color: white;
+}
+
+.analista-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.analista-table td {
+  color: #333;
+}
+
+.button {
+  background-color: #1b3e4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #356274;
+  color: white;
+}
+
+.button.delete-button {
+  background-color: #b33939;
+  margin-left: 8px;
+}
+
+.button.delete-button:hover {
+  background-color: #e74c3c;
+}
+
 
 .list {
   display: flex;
-  gap: 1em;
-  align-items: center;
-  list-style: none;
-  margin-top: 2em;
-}
-
-.button { 
-  background-color: #1b3e4d;
-  color: white; 
-}
-
-
-.button:hover { 
-  background-color: #356274; 
-  color: white;
-  border-color: #356274; 
+  justify-content: flex-end;
+  position: absolute;
+  top: -40px;
+  right: 0;
 }

@@ -1,42 +1,123 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Toaster, toast } from "sonner";
 import '../../assets/css/MenuNavBar.css';
 
-export default function Analista() {
-  return (
-    <div className='base'>
-      <div className='text'>
-        <h1>
-          Gerenciamento de Analista
-        </h1>
+export default function Analista2() {
+    const [analistaData, setAnalistaData] = useState([]); // Estado para armazenar os dados
 
-        <h4>      
-          Bem-vindo à nossa página dedicada à gestão de analistas. 
-          Aqui, você tem o controle total para adicionar ou remover 
-          novos analistas conforme necessário. 
-          Esta página foi projetada para facilitar esse processo. 
-          Sinta-se à vontade para realizar as alterações necessárias e 
-          garantir que sua equipe esteja sempre atualizada.
-        </h4>
-      </div>
-          
-      <div className='list'>
-        <Link to="cadastrar">
-          <button className='button'>
-            Cadastrar Analista
-          </button>
-        </Link>
-        <Link to="atualizar">
-          <button className='button'>
-            Atualizar Analista
-          </button>
-        </Link>
-        <Link to="deletar">
-          <button className='button'>
-            Excluir Analista
-          </button>
-        </Link>
-      </div>
-    </div>
-  );
+    useEffect(() => {
+        // Função para buscar analistas
+        const fetchAnalistas = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/analista/readAll', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': localStorage.getItem('x-access-token'),
+                    },
+                });
+                const data = await response.json();
+                setAnalistaData(data); // Armazena os dados no estado
+            } catch (error) {
+                console.error('Erro ao buscar analistas:', error);
+            }
+        };
+
+        // Chama a função de fetch assim que o componente monta
+        fetchAnalistas();
+    }, []); // O array vazio [] garante que o efeito seja executado apenas na montagem do componente
+
+    // Função para excluir analista pelo cdenf
+    const handleDelete = async (cdenf) => {
+        if (window.confirm('Tem certeza que deseja excluir este analista?')) {
+            try {
+                const response = await fetch('http://localhost:3000/analista/deleteFront', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': localStorage.getItem('x-access-token'),
+                    },
+                    body: JSON.stringify({ cdenf }), // Envia o cdenf no corpo da requisição
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    toast.success(data.message);
+                    // Atualiza a lista de analistas após excluir
+                    setAnalistaData(analistaData.filter(analista => analista.cdenf !== cdenf));
+                } else {
+                    toast.error(data.message);
+                }
+            } catch (error) {
+                toast.error("Erro ao enviar dados");
+                console.error('Erro ao enviar dados:', error);
+            }
+        }
+    };
+
+    return (
+        <div className='base'>
+            <div className='text'>
+                <h1>Gerenciamento de Analista</h1>
+                <h4>
+                    Bem-vindo à nossa página dedicada à gestão de analistas. Aqui, você tem o
+                    controle total para adicionar ou remover novos analistas conforme
+                    necessário. Esta página foi projetada para facilitar esse processo.
+                    Sinta-se à vontade para realizar as alterações necessárias e garantir
+                    que sua equipe esteja sempre atualizada.
+                </h4>
+            </div>
+
+            <div className='table-container'>
+                <div className='list'>
+                    <Link to="cadastrar">
+                        <button className='button'>Cadastrar Analista</button>
+                    </Link>
+                </div>
+
+                {/* Tabela de analistas */}
+                <table className='analista-table'>
+                    <thead>
+                        <tr>
+                            <th>Admin</th>
+                            <th>CDENF</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {analistaData.length > 0 ? (
+                            analistaData.map((analista, index) => (
+                                <tr key={index}>
+                                    <td>{analista.administrador ? "Sim" : "Não"}</td>
+                                    <td>{analista.cdenf}</td>
+                                    <td>{analista.nome}</td>
+                                    <td>{analista.email}</td>
+                                    <td>
+                                        <Link to="atualizar">
+                                            <button className='button'>
+                                                Atualizar
+                                            </button>
+                                        </Link>
+                                        <button
+                                            className='button delete-button'
+                                            onClick={() => handleDelete(analista.cdenf)} // Passa o cdenf ao clicar
+                                        >
+                                            Excluir
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="5">Nenhum analista encontrado</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 }

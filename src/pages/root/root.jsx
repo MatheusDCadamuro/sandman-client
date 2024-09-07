@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../assets/css/MenuNavBar.css';
 export default function Root() {
   return (
@@ -30,6 +32,16 @@ export default function Root() {
             medicina contemporânea.
           </h5>
         </div>
+        <Link to="exame/cadastrar">
+          <button className='button'>
+            Classificar Sinal
+          </button>
+        </Link>
+        <Link to="exame/laudo">
+          <button className='button'>
+            Visualizar
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -16,8 +16,10 @@ const authService = {
     // Função para salar o usuário logado no local storage
     setLoggedUser(data){
         let parsedData = JSON.stringify(data.token);
+        let adminToken = JSON.stringify(data.adminToken);
         console.log("parsedData", parsedData)
         localStorage.setItem("user", parsedData);
+        localStorage.setItem("admin-token", adminToken);
     },
 
     // Função responsável por recuperar o usuário logado do local storage
