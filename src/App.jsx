@@ -14,7 +14,7 @@ import CreateExame from './pages/Exame/createExame';
 import CreatePaciente from './pages/Paciente/createPaciente';
 import Laudo from './pages/Laudo/laudo';
 import GerarLaudo from './pages/Laudo/gerarLaudo';
-
+import PDF from './pages/Laudo/pdf';
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('x-access-token');
 
@@ -44,6 +44,8 @@ function App() {
       <Route path="/exame/cadastrar/paciente" element={<ProtectedRoute><CreatePaciente /></ProtectedRoute>} />
       <Route path="/exame/laudo" element={<ProtectedRoute><Laudo /></ProtectedRoute>} />
       <Route path="/exame/laudo/gerar" element={<ProtectedRoute><GerarLaudo/></ProtectedRoute>} />
+      <Route path="/exame/laudo/pdf" element={<ProtectedRoute><PDF/></ProtectedRoute>} />
+
     </Routes>
   )
 }

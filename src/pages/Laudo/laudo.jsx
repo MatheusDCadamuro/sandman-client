@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Toaster, toast } from "sonner";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import '../../assets/css/DadosListLaudo.css';
 
@@ -11,11 +11,20 @@ const schema = yup.object().shape({
 });
 
 const ExameTable = ({ exames = [], onCheckboxChange, selectedExame }) => {
+  const navigate = useNavigate();
+  const handleRowClick = (exame) => {
+    if (exame.report_pdf) {
+      // Navigate to the desired route and pass the required data
+      navigate("/exame/laudo/pdf", { state: { data: exame } });
+    }
+  };
+
   return (
     <table className="analista-table">
       <thead>
         <tr>
           <th></th>
+          <th>PDF</th>
           <th>CPF</th>
           <th>CDENF</th>
           <th>Motivo</th>
@@ -25,7 +34,7 @@ const ExameTable = ({ exames = [], onCheckboxChange, selectedExame }) => {
       <tbody>
         {exames.length > 0 ? (
           exames.map((exame) => (
-            <tr key={exame._id}>
+            <tr key={exame._id} onClick={() => handleRowClick(exame)}>
               <td>
                 <input
                   type="checkbox"
@@ -33,6 +42,7 @@ const ExameTable = ({ exames = [], onCheckboxChange, selectedExame }) => {
                   onChange={() => onCheckboxChange(exame.eeg)}
                 />
               </td>
+              <td>{exame.report_pdf ? 'X' : '*'}</td>
               <td>{exame.cpf}</td>
               <td>{exame.cdenf}</td>
               <td>{exame.motivo}</td>
@@ -41,7 +51,7 @@ const ExameTable = ({ exames = [], onCheckboxChange, selectedExame }) => {
           ))
         ) : (
           <tr>
-            <td colSpan="5" style={{ textAlign: 'center' }}>Nenhum exame encontrado</td>
+            <td colSpan="6" style={{ textAlign: 'center' }}>Nenhum exame encontrado</td>
           </tr>
         )}
       </tbody>
@@ -50,6 +60,7 @@ const ExameTable = ({ exames = [], onCheckboxChange, selectedExame }) => {
 };
 
 export default function Laudo() {
+  //navigate("/exame/laudo/pdf", { state: { data: response } });
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const [exames, setExames] = useState([]);
   const [selectedExame, setSelectedExame] = useState(null); // Permitir apenas um exame selecionado
