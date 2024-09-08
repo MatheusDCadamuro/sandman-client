@@ -105,7 +105,7 @@ export default function CreateExame() {
                 <div className="inner2">
                     <Toaster richColors />
                     <form method="post" onSubmit={onSubmit(handleSubmit)}>
-                        <h2>Dados Exame</h2>
+                        <h2>Dados do Exame</h2>
                         <input
                             id="demo-cpf"
                             type="number"
@@ -129,9 +129,11 @@ export default function CreateExame() {
                             className="input-field2"
                             {...register('motivo')}
                         />
-                        <h5>
-                            <Link className='link2' to="paciente">Cadastrar paciente</Link>
-                        </h5>
+
+                        <button className='button3'>
+                            <Link to="paciente">Cadastrar paciente</Link>
+                        </button>
+
                         <ul className="actions2">
                             <li>
                                 <h5 className=''>Coloque o EEG do paciente abaixo</h5>
@@ -154,6 +156,11 @@ export default function CreateExame() {
                                     className="primary button2"
                                 />
                             </li>
+                            <Link to="/exame/laudo">
+                                <button className='primary button2'>
+                                    Laudos
+                                </button>
+                            </Link>
                         </ul>
                     </form>
                 </div>

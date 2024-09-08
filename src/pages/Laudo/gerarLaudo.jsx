@@ -72,25 +72,27 @@ export default function GerarLaudo() {
       {eeg_reading_plot ? (
         <div>
           <h2>Resultado do Exame</h2>
+          <div className='fotos'>
           <img
             src={`data:image/png;base64,${eeg_reading_plot}`}
             alt="Laudo"
-            style={{ maxWidth: '33%', height: 'auto' }}
+            style={{ maxWidth: '100%', height: 'auto' }}
           />
           <img
             src={`data:image/png;base64,${classified_eeg_reading_plot}`}
             alt="Laudo"
-            style={{ maxWidth: '33%', height: 'auto' }}
+            style={{ maxWidth: '100%', height: 'auto' }}
           />
           <img
             src={`data:image/png;base64,${sleep_stages_distribution_plot}`}
             alt="Laudo"
-            style={{ maxWidth: '33%', height: 'auto' }}
+            style={{ maxWidth: '100%', height: 'auto' }}
           />
+          </div>
           <Toaster richColors />
           <form method="post" onSubmit={onSubmit(handleSubmit)}>
-            <div>
-              <label htmlFor="notes">notes</label>
+            <div className='notes'>
+              <label htmlFor="notes">Laudo do Analista: </label>
               <input
                 type="text"
                 id="notes"

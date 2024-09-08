@@ -104,6 +104,7 @@ export default function Analista2() {
                             <th>CDENF</th>
                             <th>Nome</th>
                             <th>Email</th>
+                            <th>Telefone</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -115,6 +116,7 @@ export default function Analista2() {
                                     <td>{analista.cdenf}</td>
                                     <td>{analista.nome}</td>
                                     <td>{analista.email}</td>
+                                    <td>{analista.telefone}</td>
                                     <td>
                                         <Link to="atualizar">
                                             <button className='button'>

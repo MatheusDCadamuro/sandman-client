@@ -36,7 +36,7 @@ function Navbar() {
                     </>
                 )}
                 <div className={styleButton.profileMenu}>
-                    <button onClick={handleLogout} className={styleButton.profileButton}>Off</button>
+                    <button onClick={handleLogout} className={styleButton.profileButton}>X</button>
                 </div>
             </div>
         </div>

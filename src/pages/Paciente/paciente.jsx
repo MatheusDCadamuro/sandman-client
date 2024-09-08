@@ -100,9 +100,11 @@ export default function Paciente() {
                 <table className='analista-table'>
                     <thead>
                         <tr>
-                            <th>CDENF</th>
+                            <th>CNS</th>
+                            <th>CPF</th>
                             <th>Nome</th>
                             <th>Email</th>
+                            <th>Telefone</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -110,10 +112,11 @@ export default function Paciente() {
                         {currentItems.length > 0 ? (
                             currentItems.map((paciente, index) => (
                                 <tr key={index}>
-                                  
+                                    <td>{paciente.cns}</td>
                                     <td>{paciente.cpf}</td>
                                     <td>{paciente.nome}</td>
                                     <td>{paciente.email}</td>
+                                    <td>{paciente.telefone}</td>
                                     <td>
                                         <Link to="atualizar">
                                             <button className='button'>

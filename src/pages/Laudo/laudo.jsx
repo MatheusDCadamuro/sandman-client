@@ -10,12 +10,12 @@ const schema = yup.object().shape({
   cpf: yup.string().required('Campo obrigatório'),
 });
 
-const ExameTable = ({ exames = [], onCheckboxChange, selectedExames }) => {
+const ExameTable = ({ exames = [], onCheckboxChange, selectedExame }) => {
   return (
     <table className="analista-table">
       <thead>
         <tr>
-          <th>Select</th>
+          <th></th>
           <th>CPF</th>
           <th>CDENF</th>
           <th>Motivo</th>
@@ -29,7 +29,7 @@ const ExameTable = ({ exames = [], onCheckboxChange, selectedExames }) => {
               <td>
                 <input
                   type="checkbox"
-                  checked={selectedExames.includes(exame.eeg)}
+                  checked={selectedExame === exame.eeg}
                   onChange={() => onCheckboxChange(exame.eeg)}
                 />
               </td>
@@ -52,15 +52,11 @@ const ExameTable = ({ exames = [], onCheckboxChange, selectedExames }) => {
 export default function Laudo() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const [exames, setExames] = useState([]);
-  const [selectedExames, setSelectedExames] = useState([]);
+  const [selectedExame, setSelectedExame] = useState(null); // Permitir apenas um exame selecionado
   const navigate = useNavigate();
 
   const onCheckboxChange = (exameId) => {
-    setSelectedExames((prevSelected) =>
-      prevSelected.includes(exameId)
-        ? prevSelected.filter((id) => id !== exameId)
-        : [...prevSelected, exameId]
-    );
+    setSelectedExame(exameId); // Apenas um exame pode ser selecionado
   };
 
   const onSubmitForm = async (data) => {
@@ -88,12 +84,12 @@ export default function Laudo() {
   };
 
   const handleViewLaudo = async () => {
-    if (selectedExames.length === 0) {
-      toast.error("Selecione pelo menos um exame para visualizar o laudo");
+    if (!selectedExame) {
+      toast.error("Selecione um exame para visualizar");
       return;
     }
     try {
-      const response = await fetch(`http://localhost:3000/exame/read/${selectedExames[0]}`, { 
+      const response = await fetch(`http://localhost:3000/exame/read/${selectedExame}`, { 
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +114,7 @@ export default function Laudo() {
         <Toaster richColors />
         <form method="post" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="inner-4">
-            <h2>Laudo</h2>
+            <h2>Paciente</h2>
             <input
               id="demo-cpf-CDEnd"
               type="number"
@@ -137,11 +133,11 @@ export default function Laudo() {
             </ul>
 
             <div>
-              <h1>Exames</h1>
+              <h2>Exames</h2>
               <ExameTable 
                 exames={exames} 
                 onCheckboxChange={onCheckboxChange} 
-                selectedExames={selectedExames} 
+                selectedExame={selectedExame} 
               />
             </div>
 
@@ -152,7 +148,7 @@ export default function Laudo() {
                   onClick={handleViewLaudo}
                   className="primary button-4"
                 >
-                  Ver Laudo
+                  Ver Exame
                 </button>
               </li>
             </ul>
