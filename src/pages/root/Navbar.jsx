@@ -32,6 +32,7 @@ function Navbar() {
                 {hasAdminToken() && (
                     <>
                         <Link className={style.item} to="analista">Analistas</Link>
+                        <Link className={style.item} to="paciente">Pacientes</Link>
                     </>
                 )}
                 <div className={styleButton.profileMenu}>

@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Root from "./pages/root/root";
 import ErrorPage from "./pages/root/errorPage";
 import Login from './pages/root/Login';
+import Paciente from './pages/Paciente/pacnete';
 import Analista from "./pages/Analista/analista";
 import CreateAnalista from "./pages/Analista/createAnalista";
 import AtualizarAnalista from "./pages/Analista/updateAnalista";
@@ -32,7 +33,7 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       <Route path="/analista" element={<ProtectedRoute><Analista /></ProtectedRoute>} />
-
+      <Route path="/paciente" element={<ProtectedRoute><Paciente /></ProtectedRoute>} />
       <Route path="/analista/cadastrar" element={<ProtectedRoute><CreateAnalista /></ProtectedRoute>} />
       <Route path="/analista/atualizar" element={<ProtectedRoute><AtualizarAnalista /></ProtectedRoute>} />
       <Route path="/analista/deletar" element={<ProtectedRoute><ExcluirAnalista /></ProtectedRoute>} />

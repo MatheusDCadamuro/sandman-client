@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import { Toaster, toast } from "sonner";
 import '../../assets/css/MenuNavBar.css';
 
-export default function Analista2() {
-    const [analistaData, setAnalistaData] = useState([]); // Estado para armazenar os dados
+export default function Paciente() {
+    const [pacienteData, setPacienteData] = useState([]); // Estado para armazenar os dados
     const [currentPage, setCurrentPage] = useState(1); // Estado para a página atual
     const itemsPerPage = 5; // Itens por página
 
     useEffect(() => {
         // Função para buscar analistas
-        const fetchAnalistas = async () => {
+        const fetchPacientes = async () => {
             try {
-                const response = await fetch('http://localhost:3000/analista/readAll', {
+                const response = await fetch('http://localhost:3000/paciente/readAll', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -20,34 +20,34 @@ export default function Analista2() {
                     },
                 });
                 const data = await response.json();
-                setAnalistaData(data); // Armazena os dados no estado
+                setPacienteData(data); // Armazena os dados no estado
             } catch (error) {
-                console.error('Erro ao buscar analistas:', error);
+                console.error('Erro ao buscar pacientes:', error);
             }
         };
 
         // Chama a função de fetch assim que o componente monta
-        fetchAnalistas();
+        fetchPacientes();
     }, []); // O array vazio [] garante que o efeito seja executado apenas na montagem do componente
 
     // Função para excluir analista pelo cdenf
-    const handleDelete = async (cdenf) => {
-        if (window.confirm('Tem certeza que deseja excluir este analista?')) {
+    const handleDelete = async (cpf) => {
+        if (window.confirm('Tem certeza que deseja excluir este paciente?')) {
             try {
-                const response = await fetch('http://localhost:3000/analista/deleteFront', {
+                const response = await fetch('http://localhost:3000/paciente/deleteFront', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'x-access-token': localStorage.getItem('x-access-token'),
                     },
-                    body: JSON.stringify({ cdenf }), // Envia o cdenf no corpo da requisição
+                    body: JSON.stringify({ cpf })
                 });
                 const data = await response.json();
 
                 if (response.ok) {
                     toast.success(data.message);
                     // Atualiza a lista de analistas após excluir
-                    setAnalistaData(analistaData.filter(analista => analista.cdenf !== cdenf));
+                    setPacienteData(pacienteData.filter(paciente => paciente.cpf !== cpf));
                 } else {
                     toast.error(data.message);
                 }
@@ -61,11 +61,11 @@ export default function Analista2() {
     // Lógica de paginação
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = analistaData.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = pacienteData.slice(indexOfFirstItem, indexOfLastItem);
 
     // Funções para avançar e voltar nas páginas
     const nextPage = () => {
-        if (currentPage < Math.ceil(analistaData.length / itemsPerPage)) {
+        if (currentPage < Math.ceil(pacienteData.length / itemsPerPage)) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -79,10 +79,10 @@ export default function Analista2() {
     return (
         <div className='base'>
             <div className='text'>
-                <h1>Gerenciamento de Analista</h1>
+                <h1>Gerenciamento de Pacientes</h1>
                 <h4>
-                    Bem-vindo à nossa página dedicada à gestão de analistas. Aqui, você tem o
-                    controle total para adicionar ou remover novos analistas conforme
+                    Bem-vindo à nossa página dedicada à gestão de pacientes. Aqui, você tem o
+                    controle total para adicionar ou remover novos pacientes conforme
                     necessário. Esta página foi projetada para facilitar esse processo.
                     Sinta-se à vontade para realizar as alterações necessárias e garantir
                     que sua equipe esteja sempre atualizada.
@@ -91,8 +91,8 @@ export default function Analista2() {
 
             <div className='table-container'>
                 <div className='list'>
-                    <Link to="cadastrar">
-                        <button className='button'>Cadastrar Analista</button>
+                    <Link to="/exame/cadastrar/paciente">
+                        <button className='button'>Cadastrar Paciente</button>
                     </Link>
                 </div>
 
@@ -100,7 +100,6 @@ export default function Analista2() {
                 <table className='analista-table'>
                     <thead>
                         <tr>
-                            <th>Admin</th>
                             <th>CDENF</th>
                             <th>Nome</th>
                             <th>Email</th>
@@ -109,12 +108,12 @@ export default function Analista2() {
                     </thead>
                     <tbody>
                         {currentItems.length > 0 ? (
-                            currentItems.map((analista, index) => (
+                            currentItems.map((paciente, index) => (
                                 <tr key={index}>
-                                    <td>{analista.administrador ? "Sim" : "Não"}</td>
-                                    <td>{analista.cdenf}</td>
-                                    <td>{analista.nome}</td>
-                                    <td>{analista.email}</td>
+                                  
+                                    <td>{paciente.cpf}</td>
+                                    <td>{paciente.nome}</td>
+                                    <td>{paciente.email}</td>
                                     <td>
                                         <Link to="atualizar">
                                             <button className='button'>
@@ -123,7 +122,7 @@ export default function Analista2() {
                                         </Link>
                                         <button
                                             className='button delete-button'
-                                            onClick={() => handleDelete(analista.cdenf)} // Passa o cdenf ao clicar
+                                            onClick={() => handleDelete(paciente.cpf)} // Passa o cdenf ao clicar
                                         >
                                             Excluir
                                         </button>
@@ -132,7 +131,7 @@ export default function Analista2() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="5">Nenhum analista encontrado</td>
+                                <td colSpan="5">Nenhum Paciente encontrado</td>
                             </tr>
                         )}
                     </tbody>
@@ -143,7 +142,7 @@ export default function Analista2() {
                     <button onClick={prevPage} disabled={currentPage === 1}>
                         Voltar
                     </button>
-                    <button onClick={nextPage} disabled={currentPage === Math.ceil(analistaData.length / itemsPerPage)}>
+                    <button onClick={nextPage} disabled={currentPage === Math.ceil(pacienteData.length / itemsPerPage)}>
                         Avançar
                     </button>
                 </div>
