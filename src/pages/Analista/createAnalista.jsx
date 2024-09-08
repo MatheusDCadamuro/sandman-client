@@ -7,7 +7,7 @@ import '../../assets/css/DadosListAnalista.css';
 
 const schema = yup.object().shape({
   cdenf: yup.string().required('Campo obrigatório')
-    .matches(/^\d{7}$/, 'Cdenf inválido'), // Corrigido para validar 7 dígitos
+    .matches(/^\d{7}$/, 'Cdenf inválido'),
   nome: yup.string().required('Campo obrigatório'),
   telefone: yup.string()
     .required('Campo obrigatório')
