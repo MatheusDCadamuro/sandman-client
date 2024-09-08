@@ -97,6 +97,7 @@ export default function Laudo() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('x-access-token'),       
         },
       }).then((response) => response.json());
 

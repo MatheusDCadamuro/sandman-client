@@ -27,8 +27,8 @@ function Login() {
                 setRedirectTo("/");
                 
             } catch (error) {
-                console.log("error", error);
-                toast.error(error.response.data.message);
+                console.log("error: ", error);
+                toast.error("Erro ao fazer login");
             }
         }
     }

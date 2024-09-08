@@ -17,7 +17,6 @@ const authService = {
     setLoggedUser(data){
         let parsedData = JSON.stringify(data.token);
         let adminToken = JSON.stringify(data.adminToken);
-        console.log("parsedData", parsedData)
         localStorage.setItem("user", parsedData);
         localStorage.setItem("admin-token", adminToken);
     },

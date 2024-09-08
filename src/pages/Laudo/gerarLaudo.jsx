@@ -36,11 +36,14 @@ export default function GerarLaudo() {
     try {
       console.log('data:', info);
      const  enviarPdf = {
-        CDEnf: data.pdf.CDEnf,
-        name: data.pdf.name,
-        job_id: data.pdf.job_id,
-        technician: data.pdf.technician,
-        notes: info.notes,
+        pdf: {
+          CDEnf: data.pdf.CDEnf,
+          name: data.pdf.name,
+          job_id: data.pdf.job_id,
+          technician: data.pdf.technician,
+          notes: info.notes,
+        },
+        email: data.email,
       }
       console.log('enviarPdf:', enviarPdf);
       const response = await fetch('http://localhost:3000/exame/pdf', {
@@ -100,7 +103,7 @@ export default function GerarLaudo() {
               <li>
                 <input
                   type="submit"
-                  value="Examinar"
+                  value="Finalizar"
                   className="primary button2"
                 />
               </li>

@@ -32,6 +32,7 @@ export default function Root() {
             medicina contemporânea.
           </h5>
         </div>
+        <div className='botoes'>
         <Link to="exame/cadastrar">
           <button className='button'>
             Classificar Sinal
@@ -42,6 +43,7 @@ export default function Root() {
             Visualizar
           </button>
         </Link>
+        </div>
       </div>
     </div>
   );
