@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../assets/css/MenuNavBar.css';
 export default function Root() {
   return (
@@ -29,6 +31,18 @@ export default function Root() {
             significativo na maneira como distúrbios do sono são compreendidos e tratados na 
             medicina contemporânea.
           </h5>
+        </div>
+        <div className='botoes'>
+        <Link to="exame/cadastrar">
+          <button className='button'>
+            Classificar Sinal
+          </button>
+        </Link>
+        <Link to="exame/laudo">
+          <button className='button'>
+            Visualizar
+          </button>
+        </Link>
         </div>
       </div>
     </div>

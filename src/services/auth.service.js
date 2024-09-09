@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Definindo a base do url para os endpoints
-const apiUrl = "http://localhost:3000/agente/login";
+const apiUrl = "http://localhost:3000/analista/login";
 
 // Definindo o bjeto do serviço
 const authService = {
@@ -16,8 +16,9 @@ const authService = {
     // Função para salar o usuário logado no local storage
     setLoggedUser(data){
         let parsedData = JSON.stringify(data.token);
-        console.log("parsedData", parsedData)
+        let adminToken = JSON.stringify(data.adminToken);
         localStorage.setItem("user", parsedData);
+        localStorage.setItem("admin-token", adminToken);
     },
 
     // Função responsável por recuperar o usuário logado do local storage
@@ -33,27 +34,4 @@ const authService = {
         }
     }
 }
-// try {
-//     const response = await fetch('http://localhost:3000/agente/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ cdenf, senha }),
-//     });
-
-//     if (response.ok) {
-//         const result = await response.json();
-//         console.log('Login bem-sucedido:', result);
-//         setToken(result.token);
-//         toast.success("Login bem-sucedido!");
-//     } else {
-//         console.error('Erro ao fazer login');
-//         toast.error("Erro ao fazer login");
-//     }
-
-// } catch (error) {
-//     toast.error("Erro ao enviar dados");
-//     console.error('Erro ao enviar dados:', error);
-// }
 export default authService;

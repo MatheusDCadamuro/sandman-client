@@ -75,7 +75,7 @@ export default function CreateExame() {
             }
             data.eeg = classifier.job_id;
             enviarBack(data);
-            
+
         } catch (error) {
             toast.error("Erro ao enviar dados para o classificador.");
             console.error('Erro ao enviar dados para o classificador:', error);
@@ -88,13 +88,13 @@ export default function CreateExame() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Yjk0ZmUwMDZhZjFhODZlOGM4YmNlOCIsImlhdCI6MTcyMzQyMDY4MiwiZXhwIjoxNzIzNTA3MDgyfQ.6aTPRfwNV234H2t56eK-bQJnBXqA_X6EyE643QPHmEg",
+                    'x-access-token': localStorage.getItem('x-access-token'),
                 },
                 body: JSON.stringify(data),
             }).then(response => response.json());
 
             if (response.ok) {
-                toast.success(response.message);
+                toast.success("Dados enviados para o classificador.");
 
             } else {
                 toast.error(response.message);
@@ -104,7 +104,6 @@ export default function CreateExame() {
             toast.error("Erro ao enviar dados.");
             console.error('Erro ao enviar dados:', error);
         }
-
     }
 
     async function handleFileInput(event) {
@@ -138,7 +137,7 @@ export default function CreateExame() {
                 <div className="inner2">
                     <Toaster richColors />
                     <form method="post" onSubmit={onSubmit(handleSubmit)}>
-                        <h2>Dados Exame</h2>
+                        <h2>Dados do Exame</h2>
                         <input
                             id="demo-cpf"
                             type="number"
@@ -162,9 +161,11 @@ export default function CreateExame() {
                             className="input-field2"
                             {...register('motivo')}
                         />
-                        <h5>
-                            <Link className='link2' to="paciente">Cadastrar paciente</Link>
-                        </h5>
+
+                        <button className='button3'>
+                            <Link to="paciente">Cadastrar paciente</Link>
+                        </button>
+
                         <ul className="actions2">
                             <li>
                                 <h5 className=''>Coloque o EEG do paciente abaixo</h5>
@@ -187,6 +188,11 @@ export default function CreateExame() {
                                     className="primary button2"
                                 />
                             </li>
+                            <Link to="/exame/laudo">
+                                <button className='primary button2'>
+                                    Laudos
+                                </button>
+                            </Link>
                         </ul>
                     </form>
                 </div>

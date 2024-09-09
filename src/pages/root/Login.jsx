@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from '../../assets/css/Login.module.css';
 import { Toaster, toast } from "sonner";
 import authService from '../../services/auth.service';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [cdenf, setCdenf] = useState('');
@@ -19,13 +20,14 @@ function Login() {
         const buttonClicked = e.nativeEvent.submitter.value;
         if (buttonClicked === "Entrar") {
             try {
+           
                 let res = await authService.authenticate(data);
-                console.log("Login", res.data);
                 authService.setLoggedUser(res.data);
+                localStorage.setItem('x-access-token', res.data.token);
                 setRedirectTo("/");
                 
             } catch (error) {
-                console.log("error", error);
+                console.log("error: ", error);
                 toast.error("Erro ao fazer login");
             }
         }

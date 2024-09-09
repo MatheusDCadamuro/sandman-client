@@ -38,9 +38,24 @@
   textarea.input-field2 {
     height: auto;
   }
-
-
   .primary.button2 {
+    background: #1b3e4d;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1em;
+    font-family: inherit;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  .primary.button2:hover {
+    background: #87a09d;
+  }
+
+  .button3 {
     background: #1b3e4d;
     color: #ffffff;
     padding: 10px 20px;
@@ -48,11 +63,9 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
-  .primary.button2:hover {
+  .button3:hover {
     background: #87a09d;
   }
-  
   .actions2 {
     text-align: center;
     margin-left: 0%;

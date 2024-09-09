@@ -5,73 +5,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import '../../assets/css/DadosListPaciente.css';
 
-
-const isValidCPF = (cpf) => {
-    cpf = cpf.replace(/[^\d]+/g, '');
-    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
-
-    let sum = 0;
-    let remainder;
-
-    for (let i = 1; i <= 9; i++) {
-        sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-    }
-
-    remainder = (sum * 10) % 11;
-    if (remainder === 10 || remainder === 11) remainder = 0;
-    if (remainder !== parseInt(cpf.substring(9, 10))) return false;
-
-    sum = 0;
-    for (let i = 1; i <= 10; i++) {
-        sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-    }
-
-    remainder = (sum * 10) % 11;
-    if (remainder === 10 || remainder === 11) remainder = 0;
-    if (remainder !== parseInt(cpf.substring(10, 11))) return false;
-
-    return true;
-};
-  
-const cnsIsValid = (cns) => {
-    cns = String(cns).replace(/\D/g, '');
-
-    if (cns.length !== 15) {
-        return false;
-    }
-
-    const sum = cns.split('')
-                    .map((digit, index) => parseInt(digit) * (15 - index))
-                    .reduce((acc, curr) => acc + curr, 0);
-
-    return sum % 11 === 0;
-};
-  
 const schema = yup.object().shape({
     nome: yup.string().required('Campo obrigatório'),
-    cpf: yup.string()
-        .required('Campo obrigatório')
-        .matches(/^\d{11}$/, 'CPF inválido')
-        .test('CPF válido', 'CPF inválido', value => isValidCPF(value)),
-    telefone: yup.string()
-        .required('Campo obrigatório')
-        .matches(/^\d{11}$/, 'Telefone inválido'),
+    cpf: yup.string().required('Campo obrigatório'),
+    telefone: yup.string().required('Campo obrigatório'),
     email: yup.string().email('Email inválido').required('Campo obrigatório'),
-    cns: yup.string()
-        .required('Campo obrigatório')
-        .matches(/^\d{15}$/, 'CNS inválido')
-        .test('CNS válido', 'CNS inválido', value => cnsIsValid(value)),
+    cns: yup.string().required('Campo obrigatório'),
     comorbidades: yup.string().required('Campo obrigatório'),
 });
 
-export default function CreatePaciente() {
+export default function UpdatePaciente() {
 
     const { register, handleSubmit: onSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
     const handleSubmit = async (data) => {
         console.log('data:', data);
         try {
-            const response = await fetch('http://localhost:3000/paciente/create', {
+            const response = await fetch('http://localhost:3000/paciente/updateFront', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -97,7 +47,7 @@ export default function CreatePaciente() {
                 <Toaster richColors />
                 <form method="post" onSubmit={onSubmit(handleSubmit)}>
                     <div className="inner3">
-                        <h2>Cadastro Paciente</h2>
+                        <h2>Atualizar Paciente</h2>
                         <input
                             type="text"
                             id="demo-nome"
