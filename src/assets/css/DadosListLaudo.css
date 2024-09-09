@@ -75,3 +75,41 @@ label {
     color: red;
     font-size: 10px;
 }
+
+table {
+    width: 60%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  thead th {
+    background-color: #1b3e4d;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  tbody th {
+    background-color: #1b3e4d;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  td {
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: center;
+    font-weight: normal;
+  }
+  
+  h3 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  

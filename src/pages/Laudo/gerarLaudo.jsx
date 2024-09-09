@@ -17,6 +17,7 @@ export default function GerarLaudo() {
   const [eeg_reading_plot, seteeg_reading_plot] = useState(null);
   const [classified_eeg_reading_plot, setclassified_eeg_reading_plot] = useState(null);
   const [sleep_stages_distribution_plot, setsleep_stages_distribution_plot] = useState(null);
+  const [stage_table, setstage_table] = useState(null);
   const { register, handleSubmit: onSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
 
@@ -28,14 +29,14 @@ export default function GerarLaudo() {
       seteeg_reading_plot(data.laudo.eeg_reading_plot);
       setclassified_eeg_reading_plot(data.laudo.classified_eeg_reading_plot);
       setsleep_stages_distribution_plot(data.laudo.sleep_stages_distribution_plot);
-
+      setstage_table(data.laudo.stage_table);
     }
   }, [data]);
 
   const handleSubmit = async (info) => {
     try {
       console.log('data:', info);
-     const  enviarPdf = {
+      const enviarPdf = {
         pdf: {
           CDEnf: data.pdf.CDEnf,
           name: data.pdf.name,
@@ -50,7 +51,7 @@ export default function GerarLaudo() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': localStorage.getItem('x-access-token'),          
+          'x-access-token': localStorage.getItem('x-access-token'),
         },
         body: JSON.stringify(enviarPdf),
       }).then((response) => response.json());
@@ -73,21 +74,53 @@ export default function GerarLaudo() {
         <div>
           <h2>Resultado do Exame</h2>
           <div className='fotos'>
-          <img
-            src={`data:image/png;base64,${eeg_reading_plot}`}
-            alt="Laudo"
-            style={{ maxWidth: '100%', height: 'auto' }}
-          />
-          <img
-            src={`data:image/png;base64,${classified_eeg_reading_plot}`}
-            alt="Laudo"
-            style={{ maxWidth: '100%', height: 'auto' }}
-          />
-          <img
-            src={`data:image/png;base64,${sleep_stages_distribution_plot}`}
-            alt="Laudo"
-            style={{ maxWidth: '100%', height: 'auto' }}
-          />
+            <img
+              src={`data:image/png;base64,${eeg_reading_plot}`}
+              alt="Laudo"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+            <img
+              src={`data:image/png;base64,${classified_eeg_reading_plot}`}
+              alt="Laudo"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+            <img
+              src={`data:image/png;base64,${sleep_stages_distribution_plot}`}
+              alt="Laudo"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+
+            {stage_table && (
+              <div>
+                <h3>Tabela dos Estágios do Sono</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Acordado</th>
+                      <th>N1</th>
+                      <th>N2</th>
+                      <th>N3</th>
+                      <th>REM</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {stage_table.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        <th>
+                          {['Acordado', 'N1', 'N2', 'N3', 'REM'][rowIndex]}
+                        </th>
+                        {row.map((cell, cellIndex) => (
+                          <td key={cellIndex}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+
           </div>
           <Toaster richColors />
           <form method="post" onSubmit={onSubmit(handleSubmit)}>
