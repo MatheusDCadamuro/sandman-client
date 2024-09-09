@@ -1,92 +1,89 @@
 /* CreateAnalista.css */
 
 #wrapper2 {
-    display: flex;
-    padding: 20px;
-    margin-top: 0%;
-    margin-left: 0%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #footer2 {
-    height: 100%;
-    align-items: center;
-  }
+  display: flex;
+  padding: 20px;
+  margin-top: 0%;
+  margin-left: 0%;
+  height: 100%;
+  min-height: 100vh; /* Garante que o contêiner ocupe toda a altura da janela */
+  justify-content: center;
+  align-items: center;
+  background-color: #87a09d; /* Fundo da página */
+  color: black; /* Texto preto */
+}
 
-  #footer2 .inner2 {
-    background: #356274;
-    align-items: center;
-    padding: 20px;
-    border-radius: 5px;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+#footer2 {
+  height: 100%;
+  align-items: center;
+}
 
-  .input-field2 {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-    align-items: center;
-  }
-  
-  textarea.input-field2 {
-    height: auto;
-  }
-  .primary.button2 {
-    background: #1b3e4d;
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 1em;
-    font-family: inherit;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  
-  .primary.button2:hover {
-    background: #87a09d;
-  }
+#footer2 .inner2 {
+  background: #356274;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: black; /* Texto preto */
+}
 
-  .button3 {
-    background: #1b3e4d;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .button3:hover {
-    background: #87a09d;
-  }
-  .actions2 {
-    text-align: center;
-    margin-left: 0%;
-    margin-right: 8%;
-  }
-  
-  .actions2 li {
-    display: inline-block;
-    margin-right: 10px;
-  }
+.input-field2 {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  background-color: white; /* Fundo branco para as caixas de texto */
+  color: black; /* Texto preto */
+}
 
-  .link2 {
-    color: rgb(255, 143, 143);
-    text-decoration: underline;
-  }
-  
-  label {
-    margin-left: 5px;
-    font-size: 14px;
-  }
-  .error {
-    color: red;
-    font-size: 10px;
-  }	
+textarea.input-field2 {
+  height: auto;
+  background-color: white; /* Fundo branco para o textarea */
+  color: black; /* Texto preto */
+}
+
+.primary.button2 {
+  background: #1b3e4d;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.primary.button2:hover {
+  background: #87a09d;
+  color: black; /* Texto preto ao passar o mouse */
+}
+
+.actions2 {
+  text-align: center;
+  margin-left: 0%;
+  margin-right: 8%;
+}
+
+.actions2 li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.link2 {
+  color: rgb(255, 143, 143);
+  text-decoration: underline;
+}
+
+label {
+  margin-left: 5px;
+  font-size: 14px;
+  color: black; /* Texto preto */
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+}

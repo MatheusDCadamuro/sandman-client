@@ -1,73 +1,91 @@
 /* CreateAnalista.css */
 
 #wrapper3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #87a09d;
-    height: 100%;
-    padding: 20px;
-    margin-left: 0%;
-  }
-  
-  #footer3 {
-    height: 100%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #87a09d; /* Fundo da página */
+  height: 100%;
+  min-height: 100vh; /* Garante que o contêiner ocupe toda a altura da janela */
+  padding: 20px;
+  margin-left: 0%;
+  color: black; /* Texto preto */
+}
 
-  #footer3 .inner3 {
-    background: #356274;
-    margin-left: 24%;
-    padding: 20px;
-    border-radius: 5px;
-    width: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .input-field3 {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  textarea.input-field3 {
-    height: auto;
-  }
-  
-  .primary.button3 {
-    background: #1b3e4d;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .primary.button3:hover {
-    background: #87a09d;
-  }
-  
-  .actions3 {
-    text-align: center;
-  }
-  
-  .actions3 li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  label {
-    margin-left: 5px;
-    font-size: 14px;
-  }
-  .error {
-    color: red;
-    font-size: 10px;
-  }	
+#footer3 {
+  height: 100%;
+}
+
+#footer3 .inner3 {
+  background: #1b3e4d;
+  margin-left: 20%;
+  padding: 20px;
+  border-radius: 5px;
+  width: 120%; /* Aumenta a largura da caixa */
+  min-height: 500px; /* Tamanho mínimo da caixa */
+  max-height: 800px; /* Tamanho máximo da caixa, caso seja necessário */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: black; /* Texto preto */
+  overflow: hidden; /* Impede que o conteúdo transborde e cause alteração no tamanho */
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: black; /* Texto preto */
+}
+
+.input-field3 {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px; /* Define a distância fixa entre os campos de texto */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: white; /* Fundo branco para as caixas de texto */
+  color: black; /* Texto preto */
+}
+
+textarea.input-field3 {
+  height: auto;
+  background-color: white; /* Fundo branco para o textarea */
+  color: black; /* Texto preto */
+  margin-bottom: 15px; /* Aplica a mesma margem ao textarea */
+}
+
+.primary.button3 {
+  background: #1b3e4d;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.primary.button3:hover {
+  background: #87a09d;
+  color: black; /* Texto preto ao passar o mouse */
+}
+
+.actions3 {
+  text-align: center;
+}
+
+.actions3 li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+label {
+  margin-left: 5px;
+  font-size: 14px;
+  color: black; /* Texto preto */
+}
+
+.error {
+  color: red;
+  font-size: 12px !important; /* Força o tamanho da fonte da mensagem de erro */
+  display: block;
+  margin-top: 5px;
+  height: 18px; /* Ajusta a altura fixa para o span de erro */
+}

@@ -1,66 +1,76 @@
 /* CreateAnalista.css */
 
 #wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #87a09d;
-    height: 100%;
-  }
-  
-  #footer .inner {
-    background: #356274;
-    padding: 20px;
-    margin-top: 9%;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .input-field {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  textarea.input-field {
-    height: auto;
-  }
-  
-  .primary.button {
-    background: #1b3e4d;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .primary.button:hover {
-    background: #87a09d;
-  }
-  
-  .actions {
-    text-align: center;
-  }
-  
-  .actions li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  label {
-    margin-left: 5px;
-    font-size: 14px;
-  }
-  .error {
-    color: red;
-    font-size: 10px;
-  }	
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #87a09d;
+  height: 100%;
+}
+
+#footer .inner {
+  background: #356274;
+  padding: 20px;
+  margin-top: 9%;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 600px; /* Largura fixa do container */
+  min-height: 400px; /* Altura mínima do container */
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: black; /* Texto preto */
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: white; /* Fundo branco para as caixas de texto */
+  color: black; /* Texto preto */
+}
+
+textarea.input-field {
+  height: auto;
+  background-color: white; /* Fundo branco para o textarea */
+  color: black; /* Texto preto */
+}
+
+.primary.button {
+  background: #1b3e4d;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Adicionado para dar espaço acima do botão */
+}
+
+.primary.button:hover {
+  background: #87a09d;
+}
+
+.actions {
+  text-align: center;
+}
+
+.actions li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+label {
+  margin-left: 5px;
+  font-size: 14px;
+  color: black; /* Texto preto */
+}
+
+.error {
+  color: red;
+  font-size: 14px; /* Aumentado para mensagens de erro mais visíveis */
+}

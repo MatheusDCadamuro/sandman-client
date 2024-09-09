@@ -3,8 +3,9 @@
     justify-content: center;
     align-items: center;
     padding: 14px;
-    height: 500px;
+    min-height: 100vh; /* Garante que o contêiner ocupe toda a altura da janela */
     background-color: #87a09d;
+    color: black; /* Define a cor do texto como preta */
 }
 
 .loginForm {
@@ -14,21 +15,25 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
     text-align: center;
+    color: black; /* Define a cor do texto como preta */
 }
 
 h2 {
     margin-bottom: 20px;
+    color: black; /* Define a cor do texto como preta */
 }
 
 .formGroup {
     margin-bottom: 15px;
     text-align: left;
+    color: black; /* Define a cor do texto como preta */
 }
 
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: black; /* Define a cor do texto como preta */
 }
 
 input[type="text"],
@@ -38,6 +43,8 @@ input[type="password"] {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: white; /* Fundo branco para as caixas de texto */
+    color: black; /* Texto preto nas caixas de texto */
 }
 
 .primaryButton {
@@ -53,10 +60,12 @@ input[type="password"] {
 
 .primaryButton:hover {
     background-color: #87a09d;
+    color: black; /* Altera a cor do texto para preta ao passar o mouse */
 }
 
 .marginTop {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
+    color: black; /* Define a cor do texto como preta */
 }
