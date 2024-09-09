@@ -66,6 +66,11 @@
   margin-left: 8px;
 }
 
+.button:disabled {
+  background-color: #cccccc; 
+  color: #666666; 
+  cursor: not-allowed; 
+}
 .button.delete-button:hover {
   background-color: #e74c3c;
 }

@@ -9,7 +9,7 @@ export default function Paciente() {
     const itemsPerPage = 5; // Itens por página
 
     useEffect(() => {
-        // Função para buscar analistas
+        // Função para buscar pacientes
         const fetchPacientes = async () => {
             try {
                 const response = await fetch('http://localhost:3000/paciente/readAll', {
@@ -30,7 +30,7 @@ export default function Paciente() {
         fetchPacientes();
     }, []); // O array vazio [] garante que o efeito seja executado apenas na montagem do componente
 
-    // Função para excluir analista pelo cdenf
+    // Função para excluir paciente pelo CPF
     const handleDelete = async (cpf) => {
         if (window.confirm('Tem certeza que deseja excluir este paciente?')) {
             try {
@@ -46,7 +46,7 @@ export default function Paciente() {
 
                 if (response.ok) {
                     toast.success(data.message);
-                    // Atualiza a lista de analistas após excluir
+                    // Atualiza a lista de pacientes após excluir
                     setPacienteData(pacienteData.filter(paciente => paciente.cpf !== cpf));
                 } else {
                     toast.error(data.message);
@@ -96,7 +96,7 @@ export default function Paciente() {
                     </Link>
                 </div>
 
-                {/* Tabela de analistas */}
+                {/* Tabela de pacientes */}
                 <table className='analista-table'>
                     <thead>
                         <tr>
@@ -125,7 +125,7 @@ export default function Paciente() {
                                         </Link>
                                         <button
                                             className='button delete-button'
-                                            onClick={() => handleDelete(paciente.cpf)} // Passa o cdenf ao clicar
+                                            onClick={() => handleDelete(paciente.cpf)} // Passa o CPF ao clicar
                                         >
                                             Excluir
                                         </button>
@@ -134,7 +134,7 @@ export default function Paciente() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="5">Nenhum Paciente encontrado</td>
+                                <td colSpan="6">Nenhum Paciente encontrado</td>
                             </tr>
                         )}
                     </tbody>
@@ -142,10 +142,11 @@ export default function Paciente() {
 
                 {/* Botões de navegação */}
                 <div className="pagination">
-                    <button onClick={prevPage} disabled={currentPage === 1}>
+                    <button onClick={prevPage} disabled={currentPage === 1} className='button'>
                         Voltar
                     </button>
-                    <button onClick={nextPage} disabled={currentPage === Math.ceil(pacienteData.length / itemsPerPage)}>
+                    <span>{currentPage} de {Math.ceil(pacienteData.length / itemsPerPage)}</span> {/* Exibe o número da página */}
+                    <button onClick={nextPage} disabled={currentPage === Math.ceil(pacienteData.length / itemsPerPage)} className='button'>
                         Avançar
                     </button>
                 </div>

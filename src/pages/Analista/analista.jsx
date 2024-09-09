@@ -62,10 +62,11 @@ export default function Analista2() {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = analistaData.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(analistaData.length / itemsPerPage); // Calcula o número total de páginas
 
     // Funções para avançar e voltar nas páginas
     const nextPage = () => {
-        if (currentPage < Math.ceil(analistaData.length / itemsPerPage)) {
+        if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -137,13 +138,22 @@ export default function Analista2() {
                         )}
                     </tbody>
                 </table>
-                <div className="pagination">
-                     <button onClick={prevPage} disabled={currentPage === 1}>
+                 <div className="pagination">
+                    <button
+                        onClick={prevPage}
+                        disabled={currentPage === 1}
+                        className='button'
+                    >
                         Voltar
                     </button>
-                    <button onClick={nextPage} disabled={currentPage === Math.ceil(analistaData.length / itemsPerPage)}>
+                    <button
+                        onClick={nextPage}
+                        disabled={currentPage === totalPages}
+                        className='button'
+                        >
                         Avançar
                     </button>
+                        <span>  {currentPage} de {totalPages}</span>
                 </div>
             </div>
         </div>
