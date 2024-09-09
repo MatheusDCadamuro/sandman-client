@@ -138,7 +138,7 @@ export default function Analista2() {
                         )}
                     </tbody>
                 </table>
-                 <div className="pagination">
+                 <div className="botoes">
                     <button
                         onClick={prevPage}
                         disabled={currentPage === 1}

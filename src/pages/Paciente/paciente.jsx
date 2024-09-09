@@ -141,7 +141,7 @@ export default function Paciente() {
                 </table>
 
                 {/* Botões de navegação */}
-                <div className="pagination">
+                <div className="botoes">
                     <button onClick={prevPage} disabled={currentPage === 1} className='button'>
                         Voltar
                     </button>

@@ -112,4 +112,6 @@ table {
     font-weight: bold;
   }
   
-  
+  .botoes {
+    gap: 10px;
+  }
