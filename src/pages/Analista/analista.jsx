@@ -137,15 +137,13 @@ export default function Analista2() {
                         )}
                     </tbody>
                 </table>
-
-                {/* Botões de navegação */}
                 <div className="pagination">
-                    {/* <button onClick={prevPage} disabled={currentPage === 1}>
+                     <button onClick={prevPage} disabled={currentPage === 1}>
                         Voltar
                     </button>
                     <button onClick={nextPage} disabled={currentPage === Math.ceil(analistaData.length / itemsPerPage)}>
                         Avançar
-                    </button> */}
+                    </button>
                 </div>
             </div>
         </div>

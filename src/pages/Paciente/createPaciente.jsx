@@ -61,7 +61,6 @@ const schema = yup.object().shape({
         .required('Campo obrigatório')
         .matches(/^\d{15}$/, 'CNS inválido')
         .test('CNS válido', 'CNS inválido', value => cnsIsValid(value)),
-    comorbidades: yup.string().required('Campo obrigatório'),
 });
 
 export default function CreatePaciente() {
@@ -78,15 +77,12 @@ export default function CreatePaciente() {
                     'x-access-token': localStorage.getItem('x-access-token'),
                 },
                 body: JSON.stringify(data),
-            });
+            }).then(response => response.json());
 
             if (response.ok) {
-                const result = await response.json();
-                console.log('Paciente cadastrado com sucesso:', result);
-                toast.success("Paciente cadastrado com sucesso!");
+              toast.success(response.message);
             } else {
-                console.error('Erro ao cadastrar paciente');
-                toast.error("Erro ao cadastrar paciente");
+              toast.error(response.message);
             }
         } catch (error) {
             toast.error("Erro ao enviar dados");
@@ -142,13 +138,6 @@ export default function CreatePaciente() {
                         placeholder="CNS"
                         className="input-field3"
                         {...register('cns')}
-                    />
-                    <input
-                        type="text"
-                        id="demo-comorbidades"
-                        placeholder="Comorbidades"
-                        className="input-field3"
-                        {...register('comorbidades')}
                     />
                     <ul className="actions3">
                         <li>
