@@ -145,10 +145,10 @@ export default function Paciente() {
                     <button onClick={prevPage} disabled={currentPage === 1} className='button'>
                         Voltar
                     </button>
-                    <span>{currentPage} de {Math.ceil(pacienteData.length / itemsPerPage)}</span> {/* Exibe o número da página */}
                     <button onClick={nextPage} disabled={currentPage === Math.ceil(pacienteData.length / itemsPerPage)} className='button'>
                         Avançar
                     </button>
+                    <span> {currentPage} de {Math.ceil(pacienteData.length / itemsPerPage)}</span> {/* Exibe o número da página */}
                 </div>
             </div>
         </div>
