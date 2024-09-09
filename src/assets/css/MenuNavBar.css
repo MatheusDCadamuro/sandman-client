@@ -3,25 +3,29 @@
   flex-direction: column;
   padding: 15.5px;
   height: 100%;
+  min-height: 100vh; /* Garante que o contêiner ocupe toda a altura da janela */
   background-color: #87a09d;
+  color: black; /* Define a cor do texto como preta */
 }
 
 .text {
   width: 60%;
   margin: 0 auto;
   text-align: left;
+  color: black; /* Define a cor do texto como preta */
 }
 
 .table-container {
-  margin: 2em auto; 
-  width: 80%; 
+  margin: 2em auto;
+  width: 80%;
   position: relative;
 }
 
 .analista-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background-color: white; /* Fundo branco para a tabela */
+  color: black; /* Texto preto dentro da tabela */
 }
 
 .analista-table th, .analista-table td {
@@ -29,6 +33,7 @@
   border: 1px solid #ccc;
   text-align: left;
 }
+
 .analista-table th {
   background-color: #1b3e4d;
   color: white;
@@ -39,7 +44,7 @@
 }
 
 .analista-table td {
-  color: #333;
+  color: #333; /* Texto preto */
 }
 
 .button {

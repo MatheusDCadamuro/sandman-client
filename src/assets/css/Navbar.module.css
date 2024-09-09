@@ -1,10 +1,13 @@
-.navbar{
+/* Navbar e Footer Styling */
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #356274;
+    background-color: #356274; /* Cor de fundo da navbar */
     height: 50px;
+    color: black; /* Texto preto na navbar */
 }
 
 .list {
@@ -12,15 +15,17 @@
     justify-content: space-between;
     align-items: center;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .item {
     margin-right: 1em;
-    color: white;
+    color: white; /* Texto branco nos itens da lista */
 }
 
 .item:hover {
-    color: #87a09d;
+    color: #87a09d; /* Cor de destaque ao passar o mouse */
 }
 
 .footer {
@@ -28,5 +33,36 @@
     bottom: 0;
     width: 100%;
     height: 2.5rem;      
-    background-color: #2d0172;
+    background-color: #356274; /* Cor de fundo do rodapé */
+    color: black; /* Texto preto no rodapé */
+}
+
+/* Ajuste de Texto e Fundo da Página */
+
+body {
+    background-color: #87a09d; /* Fundo da página */
+    color: black; /* Texto preto */
+    margin: 0;
+    font-family: Arial, sans-serif; /* Fonte padrão */
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    background-color: white; /* Fundo branco para as caixas de texto e textarea */
+    color: black; /* Texto preto */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+label {
+    font-size: 14px;
+    color: black; /* Texto preto para labels */
+}
+
+.error {
+    color: red;
+    font-size: 10px;
 }
