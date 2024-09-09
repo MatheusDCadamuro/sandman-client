@@ -28,7 +28,7 @@ function Login() {
                 
             } catch (error) {
                 console.log("error: ", error);
-                toast.error("Erro ao fazer login");
+                toast.error(error.response.data.message);
             }
         }
     }
